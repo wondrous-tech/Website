@@ -1,0 +1,143 @@
+.branding-cta {
+  position: relative;
+  display: flex;
+  max-width: 1152px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 96px 64px 64px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  background: #e9e8e4;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    padding: 64px 40px 48px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 48px 20px 40px;
+  }
+}
+
+.branding-cta__border {
+  position: absolute;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.branding-cta__border--small {
+  top: -48px;
+  right: -80px;
+  width: 256px;
+  height: 256px;
+  border: 1px solid rgba(115, 92, 0, 0.2);
+}
+
+.branding-cta__border--large {
+  bottom: -80px;
+  left: -80px;
+  width: 384px;
+  height: 384px;
+  border: 1px solid rgba(20, 77, 55, 0.05);
+
+  @media (max-width: 640px) {
+    display: none;
+  }
+}
+
+.branding-cta__container {
+  position: relative;
+  display: flex;
+  max-width: 576px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.branding-cta__heading {
+  margin: 0;
+  color: #12a45c;
+  text-align: center;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: clamp(28px, 3.4vw, 32px);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.branding-cta__subtext {
+  margin: 0;
+  color: #414944;
+  text-align: center;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.branding-cta__actions {
+  display: flex;
+  padding-top: 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.branding-cta__cta {
+  display: flex;
+  padding: 17px 40px;
+  justify-content: center;
+  align-items: center;
+  background: #12a45c;
+  color: #fff;
+  text-align: center;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.branding-cta__cta:hover {
+  background: #123f30;
+  transform: translateY(-1px);
+}
+
+.branding-cta__cta:focus-visible {
+  outline: 2px solid var(--brand-emerald-bright);
+  outline-offset: 3px;
+}
+
+.branding-cta__cta-outline {
+  display: flex;
+  padding: 16px 40px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #12a45c;
+  color: #12a45c;
+  text-align: center;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.branding-cta__cta-outline:hover {
+  background: rgba(20, 77, 55, 0.06);
+  transform: translateY(-1px);
+}
+
+.branding-cta__cta-outline:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}

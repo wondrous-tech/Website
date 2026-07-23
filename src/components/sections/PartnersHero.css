@@ -1,0 +1,133 @@
+.partners-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 96px 64px;
+  background: #faf9f5;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    padding: 72px 24px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 56px 16px;
+  }
+}
+
+.partners-hero__watermark {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  opacity: 0.1;
+  pointer-events: none;
+
+  @media (max-width: 1024px) {
+    width: 180px;
+    height: auto;
+  }
+
+  @media (max-width: 640px) {
+    display: none;
+  }
+}
+
+.partners-hero__container {
+  position: relative;
+  display: flex;
+  max-width: 896px;
+  width: 100%;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.partners-hero__eyebrow {
+  color: #735c00;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.partners-hero__heading {
+  margin: 0;
+  max-width: 700px;
+  color: #12a45c;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: clamp(32px, 4.4vw, 48px);
+  font-weight: 600;
+  line-height: 1.16;
+  letter-spacing: -0.96px;
+}
+
+.partners-hero__subtext {
+  max-width: 672px;
+  margin: 0;
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 155.556%;
+}
+
+.partners-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 8px;
+  flex-wrap: wrap;
+}
+
+.partners-hero__cta {
+  display: flex;
+  padding: 16px 32px;
+  align-items: center;
+  border-radius: 12px;
+  background: #12a45c;
+  color: #fff;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.partners-hero__cta:hover {
+  opacity: 0.85;
+}
+
+.partners-hero__cta-outline {
+  display: flex;
+  padding: 16px 32px;
+  align-items: center;
+  border-radius: 12px;
+  border: 1px solid #12a45c;
+  color: #12a45c;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.partners-hero__cta-outline:hover {
+  background: #12a45c;
+  color: #fff;
+}
+
+.partners-hero__cta:focus-visible,
+.partners-hero__cta-outline:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}

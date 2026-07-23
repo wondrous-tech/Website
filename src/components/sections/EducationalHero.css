@@ -1,0 +1,221 @@
+.educational-hero {
+  position: relative;
+  display: flex;
+  min-height: 620px;
+  align-items: center;
+  padding: 96px 64px;
+  background-color: #faf9f5;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    min-height: 520px;
+    padding: 64px 40px;
+  }
+
+  @media (max-width: 640px) {
+    min-height: 420px;
+    padding: 48px 24px;
+  }
+}
+
+.educational-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(250, 249, 245, 0.92) 0%, rgba(250, 249, 245, 0.55) 50%, rgba(250, 249, 245, 0.1) 100%);
+}
+
+.educational-hero__container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  max-width: 560px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.educational-hero__badge {
+  display: inline-flex;
+  padding: 4px 12px;
+  align-items: center;
+  gap: 8px;
+  background: var(--brand-emerald);
+  color: #ffffff;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.educational-hero__badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+  animation: educational-hero-dot-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes educational-hero-dot-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+
+.educational-hero__heading {
+  margin: 0;
+  color: #12a45c;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: clamp(32px, 4.4vw, 48px);
+  font-weight: 600;
+  line-height: 1.17;
+  letter-spacing: -0.96px;
+}
+
+.educational-hero__subtext {
+  margin: 0;
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.educational-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 16px;
+  flex-wrap: wrap;
+}
+
+.educational-hero__cta {
+  display: flex;
+  padding: 16.5px 32px 17.5px;
+  align-items: center;
+  gap: 8px;
+  background: #12a45c;
+  color: #fff;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration: none;
+  border-radius: 12px;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.educational-hero__cta:hover {
+  background: #123f30;
+  transform: translateY(-1px);
+}
+
+.educational-hero__cta:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.educational-hero__cta-outline {
+  display: flex;
+  padding: 16px 32px;
+  align-items: center;
+  border: 1px solid #12a45c;
+  border-radius: 12px;
+  color: #12a45c;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.educational-hero__cta-outline:hover {
+  background: rgba(20, 77, 55, 0.06);
+  transform: translateY(-1px);
+}
+
+.educational-hero__cta-outline:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+@keyframes educational-hero-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.educational-hero__reveal {
+  animation: educational-hero-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.educational-hero__reveal--delay-1 {
+  animation-delay: 0.08s;
+}
+
+.educational-hero__reveal--delay-2 {
+  animation-delay: 0.16s;
+}
+
+.educational-hero__reveal--delay-3 {
+  animation-delay: 0.24s;
+}
+
+.educational-hero__rating {
+  position: absolute;
+  z-index: 1;
+  right: 64px;
+  bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(20, 77, 55, 0.1);
+  box-shadow: 0 10px 30px -10px rgba(20, 77, 55, 0.2);
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
+
+.educational-hero__rating-stars {
+  display: flex;
+  gap: 2px;
+  color: #ffffff;
+}
+
+.educational-hero__rating-text {
+  color: #12a45c;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .educational-hero__reveal,
+  .educational-hero__badge-dot {
+    animation: none;
+  }
+}

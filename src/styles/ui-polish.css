@@ -1,0 +1,223 @@
+/* ============================================
+   UI/UX Polish & Professional Enhancements
+   ============================================ */
+
+/* Improved Button Styles */
+button, a[role="button"], .btn {
+  transition: all var(--transition-base);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+button:active, a[role="button"]:active, .btn:active {
+  transform: scale(0.98);
+}
+
+/* Enhanced Link Styles */
+a {
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+  text-decoration-skip-ink: auto;
+}
+
+/* Improved Form Elements */
+input, textarea, select {
+  transition: border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  box-shadow: var(--ring-focus);
+}
+
+/* Enhanced Cards & Containers */
+.card, [role="article"] {
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.card:hover, [role="article"]:hover {
+  transform: translateY(-2px);
+}
+
+/* Improved Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+/* Smooth Scrolling for Anchor Links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced Focus Visible States */
+*:focus-visible {
+  outline: 2px solid var(--brand-emerald);
+  outline-offset: 2px;
+}
+
+button:focus-visible, a:focus-visible {
+  outline-offset: 3px;
+}
+
+/* Improved Hover States */
+@media (hover: hover) {
+  a:hover {
+    text-decoration-underline-offset: 0.25em;
+  }
+  
+  button:hover, a[role="button"]:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  /* Increase touch target sizes */
+  button, a[role="button"], input[type="button"], input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 16px;
+  }
+  
+  /* Improve spacing on mobile */
+  body {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+  
+  /* Better mobile typography */
+  h1 { font-size: clamp(1.5rem, 5vw, 2.5rem); }
+  h2 { font-size: clamp(1.25rem, 4vw, 1.75rem); }
+  h3 { font-size: clamp(1.125rem, 3vw, 1.5rem); }
+  
+  /* Improve form spacing on mobile */
+  input, textarea, select {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+}
+
+/* Tablet Optimization */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Balanced spacing for tablets */
+  body {
+    font-size: 15px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+  
+  button, .no-print {
+    display: none !important;
+  }
+}
+
+/* Accessibility Improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Loading States */
+[aria-busy="true"] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Disabled States */
+:disabled, [aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Selection Styles */
+::selection {
+  background-color: var(--brand-emerald);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--brand-emerald);
+  color: white;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-emerald);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-emerald-deep);
+}
+
+/* Improved Image Handling */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+picture {
+  display: contents;
+}
+
+/* Smooth Color Transitions */
+* {
+  --transition-colors: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+/* Enhanced Contrast for Better Readability */
+@media (prefers-contrast: more) {
+  body {
+    font-weight: 500;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+}
+
+/* Dark Mode Support (Future) */
+@media (prefers-color-scheme: dark) {
+  /* Placeholder for future dark mode implementation */
+}

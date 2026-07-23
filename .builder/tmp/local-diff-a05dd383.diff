@@ -1,0 +1,339 @@
+diff --git a/wonderous/src/components/ui/MobileAccordion.tsx b/wonderous/src/components/ui/MobileAccordion.tsx
+index 64e7c77..4139ebf 100644
+--- a/wonderous/src/components/ui/MobileAccordion.tsx
++++ b/wonderous/src/components/ui/MobileAccordion.tsx
+@@ -1,9 +1,11 @@
+[L:1]  import { useState } from 'react'
+[L:2] +import { Link } from 'react-router-dom'
+[L:3] +import type { NavMenuItem } from '../../utils/navMenus'
+[L:4/2]  
+[L:5/3]  export interface MobileAccordionProps {
+[L:6/4]    label: string
+[L:7/5]    heading: string
+[L:6] -  items: string[]
+[L:8] +  items: NavMenuItem[]
+[L:9/7]    onNavigate: () => void
+[L:10/8]  }
+[L:11/9]  
+@@ -35,10 +37,16 @@ export function MobileAccordion({ label, heading, items, onNavigate }: MobileAcc
+[L:37/35]            <span className="mobile-menu__accordion-heading">{heading}</span>
+[L:38/36]            <ul className="mobile-menu__accordion-list">
+[L:39/37]              {items.map((item) => (
+[L:38] -              <li key={item}>
+[L:39] -                <a href="#" onClick={onNavigate}>
+[L:40] -                  {item}
+[L:41] -                </a>
+[L:40] +              <li key={item.label}>
+[L:41] +                {item.href ? (
+[L:42] +                  <Link to={item.href} onClick={onNavigate}>
+[L:43] +                    {item.label}
+[L:44] +                  </Link>
+[L:45] +                ) : (
+[L:46] +                  <a href="#" onClick={onNavigate}>
+[L:47] +                    {item.label}
+[L:48] +                  </a>
+[L:49] +                )}
+[L:50/42]                </li>
+[L:51/43]              ))}
+[L:52/44]            </ul>
+diff --git a/wonderous/src/main.tsx b/wonderous/src/main.tsx
+index d68fac9..c5737d6 100644
+--- a/wonderous/src/main.tsx
++++ b/wonderous/src/main.tsx
+@@ -1,10 +1,13 @@
+[L:1]  import { StrictMode } from 'react'
+[L:2]  import { createRoot } from 'react-dom/client'
+[L:3] +import { BrowserRouter } from 'react-router-dom'
+[L:4/3]  import './styles/index.css'
+[L:5/4]  import App from './App.tsx'
+[L:6/5]  
+[L:7/6]  createRoot(document.getElementById('root')!).render(
+[L:8/7]    <StrictMode>
+[L:8] -    <App />
+[L:9] +    <BrowserRouter>
+[L:10] +      <App />
+[L:11] +    </BrowserRouter>
+[L:12/9]    </StrictMode>,
+[L:13/10]  )
+diff --git a/wonderous/src/components/ui/NavDropdown.tsx b/wonderous/src/components/ui/NavDropdown.tsx
+index 0c6cf70..fb0757a 100644
+--- a/wonderous/src/components/ui/NavDropdown.tsx
++++ b/wonderous/src/components/ui/NavDropdown.tsx
+@@ -1,10 +1,12 @@
+[L:1]  import { useState, type CSSProperties } from 'react'
+[L:2] +import { Link } from 'react-router-dom'
+[L:3/2]  import watermark from '../../assets/pngwing.com.png'
+[L:4] +import type { NavMenuItem } from '../../utils/navMenus'
+[L:5/3]  
+[L:6/4]  export interface NavDropdownProps {
+[L:7/5]    label: string
+[L:8/6]    heading: string
+[L:7] -  items: string[]
+[L:9] +  items: NavMenuItem[]
+[L:10/8]    active?: boolean
+[L:11/9]  }
+[L:12/10]  
+@@ -44,11 +46,18 @@ export function NavDropdown({ label, heading, items, active }: NavDropdownProps)
+[L:46/44]            <span className="nav-dropdown__heading">{heading}</span>
+[L:47/45]            <ul className="nav-dropdown__list">
+[L:48/46]              {items.map((item, index) => (
+[L:47] -              <li key={item} style={{ '--stagger': index } as CSSProperties}>
+[L:48] -                <a href="#" className="cursor-target">
+[L:49] -                  <span className="nav-item-bg" aria-hidden="true" />
+[L:50] -                  <span className="nav-item-label">{item}</span>
+[L:51] -                </a>
+[L:49] +              <li key={item.label} style={{ '--stagger': index } as CSSProperties}>
+[L:50] +                {item.href ? (
+[L:51] +                  <Link to={item.href} className="cursor-target">
+[L:52] +                    <span className="nav-item-bg" aria-hidden="true" />
+[L:53] +                    <span className="nav-item-label">{item.label}</span>
+[L:54] +                  </Link>
+[L:55] +                ) : (
+[L:56] +                  <a href="#" className="cursor-target">
+[L:57] +                    <span className="nav-item-bg" aria-hidden="true" />
+[L:58] +                    <span className="nav-item-label">{item.label}</span>
+[L:59] +                  </a>
+[L:60] +                )}
+[L:61/52]                </li>
+[L:62/53]              ))}
+[L:63/54]            </ul>
+diff --git a/wonderous/src/utils/navMenus.ts b/wonderous/src/utils/navMenus.ts
+index 2fbeeeb..c14af69 100644
+--- a/wonderous/src/utils/navMenus.ts
++++ b/wonderous/src/utils/navMenus.ts
+@@ -1,7 +1,12 @@
+[L:1] +export interface NavMenuItem {
+[L:2] +  label: string
+[L:3] +  href?: string
+[L:4] +}
+[L:5] +
+[L:6/1]  export interface NavMenu {
+[L:7/2]    label: string
+[L:8/3]    heading: string
+[L:4] -  items: string[]
+[L:9] +  items: NavMenuItem[]
+[L:10/5]    active?: boolean
+[L:11/6]  }
+[L:12/7]  
+@@ -10,34 +15,40 @@ export const navMenus: NavMenu[] = [
+[L:15/10]      label: 'Explore',
+[L:16/11]      heading: 'Explore Wondrous',
+[L:17/12]      active: true,
+[L:13] -    items: ['About us', 'Jobs', 'Blogs', 'Testimonials', 'Partner with us'],
+[L:18] +    items: [
+[L:19] +      { label: 'About us', href: '/about' },
+[L:20] +      { label: 'Jobs' },
+[L:21] +      { label: 'Blogs' },
+[L:22] +      { label: 'Testimonials' },
+[L:23] +      { label: 'Partner with us' },
+[L:24] +    ],
+[L:25/14]    },
+[L:26/15]    {
+[L:27/16]      label: 'Solutions',
+[L:28/17]      heading: 'Our Solutions',
+[L:29/18]      items: [
+[L:19] -      'Self-publishing',
+[L:20] -      'Printing',
+[L:21] -      'Branding',
+[L:22] -      'Finishing services',
+[L:23] -      'Educational publishing',
+[L:30] +      { label: 'Self-publishing' },
+[L:31] +      { label: 'Printing' },
+[L:32] +      { label: 'Branding' },
+[L:33] +      { label: 'Finishing services' },
+[L:34] +      { label: 'Educational publishing' },
+[L:35/24]      ],
+[L:36/25]    },
+[L:37/26]    {
+[L:38/27]      label: 'Editing',
+[L:39/28]      heading: 'Editing Packages',
+[L:40/29]      items: [
+[L:30] -      'Manuscript evaluation',
+[L:31] -      'Light editing',
+[L:32] -      'Medium editing',
+[L:33] -      'Heavy editing',
+[L:34] -      'Ghostwriting',
+[L:35] -      'Writing academy',
+[L:41] +      { label: 'Manuscript evaluation' },
+[L:42] +      { label: 'Light editing' },
+[L:43] +      { label: 'Medium editing' },
+[L:44] +      { label: 'Heavy editing' },
+[L:45] +      { label: 'Ghostwriting' },
+[L:46] +      { label: 'Writing academy' },
+[L:47/36]      ],
+[L:48/37]    },
+[L:49/38]    {
+[L:50/39]      label: 'Buy/Sell',
+[L:51/40]      heading: 'Buy/Sell',
+[L:41] -    items: ['Hardcopies', 'eBooks/Audiobooks'],
+[L:52] +    items: [{ label: 'Hardcopies' }, { label: 'eBooks/Audiobooks' }],
+[L:53/42]    },
+[L:54/43]  ]
+[L:55/44] 
+diff --git a/wonderous/src/App.tsx b/wonderous/src/App.tsx
+index 86fb720..8f9bfc2 100644
+--- a/wonderous/src/App.tsx
++++ b/wonderous/src/App.tsx
+@@ -1,7 +1,14 @@
+[L:1] +import { Route, Routes } from 'react-router-dom'
+[L:2/1]  import { Home } from './pages/Home'
+[L:3] +import { AboutUs } from './pages/AboutUs'
+[L:4/2]  
+[L:5/3]  function App() {
+[L:4] -  return <Home />
+[L:6] +  return (
+[L:7] +    <Routes>
+[L:8] +      <Route path="/" element={<Home />} />
+[L:9] +      <Route path="/about" element={<AboutUs />} />
+[L:10] +    </Routes>
+[L:11] +  )
+[L:12/5]  }
+[L:13/6]  
+[L:14/7]  export default App
+diff --git a/wonderous/pnpm-lock.yaml b/wonderous/pnpm-lock.yaml
+index d75f65a..c50c969 100644
+--- a/wonderous/pnpm-lock.yaml
++++ b/wonderous/pnpm-lock.yaml
+@@ -14,6 +14,9 @@ importers:
+[L:14]        react-dom:
+[L:15]          specifier: ^19.2.7
+[L:16]          version: 19.2.7(react@19.2.7)
+[L:17] +      react-router-dom:
+[L:18] +        specifier: ^7.18.1
+[L:19] +        version: 7.18.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+[L:20/17]      devDependencies:
+[L:21/18]        '@eslint/js':
+[L:22/19]          specifier: ^10.0.1
+@@ -444,6 +447,10 @@ packages:
+[L:447/444]    convert-source-map@2.0.0:
+[L:448/445]      resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
+[L:449/446]  
+[L:450] +  cookie@1.1.1:
+[L:451] +    resolution: {integrity: sha512-ei8Aos7ja0weRpFzJnEA9UHJ/7XQmqglbRwnf2ATjcB9Wq874VKH9kfjjirM6UhU2/E5fFYadylyhFldcqSidQ==}
+[L:452] +    engines: {node: '>=18'}
+[L:453] +
+[L:454/447]    cross-spawn@7.0.6:
+[L:455/448]      resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
+[L:456/449]      engines: {node: '>= 8'}
+@@ -783,6 +790,23 @@ packages:
+[L:790/783]      peerDependencies:
+[L:791/784]        react: ^19.2.7
+[L:792/785]  
+[L:793] +  react-router-dom@7.18.1:
+[L:794] +    resolution: {integrity: sha512-KaZh+X/6UtEp28x51AUYZDMg9NGoz2ja3dNHa+ta/tk40vCzKhQ/RypCWBMLbmDr6//E24Vv5uPsrqXFozdkAg==}
+[L:795] +    engines: {node: '>=20.0.0'}
+[L:796] +    peerDependencies:
+[L:797] +      react: '>=18'
+[L:798] +      react-dom: '>=18'
+[L:799] +
+[L:800] +  react-router@7.18.1:
+[L:801] +    resolution: {integrity: sha512-GDLgg3i3uM0aeJO3Fm+TCS+sDQ7gu12T6x0qdTEzcwqEfleci7JwugVNIF3U//0FWKnJT7ptG+20B2jfDqnZAg==}
+[L:802] +    engines: {node: '>=20.0.0'}
+[L:803] +    peerDependencies:
+[L:804] +      react: '>=18'
+[L:805] +      react-dom: '>=18'
+[L:806] +    peerDependenciesMeta:
+[L:807] +      react-dom:
+[L:808] +        optional: true
+[L:809] +
+[L:810/786]    react@19.2.7:
+[L:811/787]      resolution: {integrity: sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ==}
+[L:812/788]      engines: {node: '>=0.10.0'}
+@@ -804,6 +828,9 @@ packages:
+[L:828/804]      engines: {node: '>=10'}
+[L:829/805]      hasBin: true
+[L:830/806]  
+[L:831] +  set-cookie-parser@2.7.2:
+[L:832] +    resolution: {integrity: sha512-oeM1lpU/UvhTxw+g3cIfxXHyJRc/uidd3yK1P242gzHds0udQBYzs3y8j4gCCW+ZJ7ad0yctld8RYO+bdurlvw==}
+[L:833] +
+[L:834/807]    shebang-command@2.0.0:
+[L:835/808]      resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==}
+[L:836/809]      engines: {node: '>=8'}
+@@ -1324,6 +1351,8 @@ snapshots:
+[L:1351/1324]  
+[L:1352/1325]    convert-source-map@2.0.0: {}
+[L:1353/1326]  
+[L:1354] +  cookie@1.1.1: {}
+[L:1355] +
+[L:1356/1327]    cross-spawn@7.0.6:
+[L:1357/1328]      dependencies:
+[L:1358/1329]        path-key: 3.1.1
+@@ -1612,6 +1641,20 @@ snapshots:
+[L:1641/1612]        react: 19.2.7
+[L:1642/1613]        scheduler: 0.27.0
+[L:1643/1614]  
+[L:1644] +  react-router-dom@7.18.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+[L:1645] +    dependencies:
+[L:1646] +      react: 19.2.7
+[L:1647] +      react-dom: 19.2.7(react@19.2.7)
+[L:1648] +      react-router: 7.18.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+[L:1649] +
+[L:1650] +  react-router@7.18.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+[L:1651] +    dependencies:
+[L:1652] +      cookie: 1.1.1
+[L:1653] +      react: 19.2.7
+[L:1654] +      set-cookie-parser: 2.7.2
+[L:1655] +    optionalDependencies:
+[L:1656] +      react-dom: 19.2.7(react@19.2.7)
+[L:1657] +
+[L:1658/1615]    react@19.2.7: {}
+[L:1659/1616]  
+[L:1660/1617]    rolldown@1.1.4:
+@@ -1641,6 +1684,8 @@ snapshots:
+[L:1684/1641]  
+[L:1685/1642]    semver@7.8.5: {}
+[L:1686/1643]  
+[L:1687] +  set-cookie-parser@2.7.2: {}
+[L:1688] +
+[L:1689/1644]    shebang-command@2.0.0:
+[L:1690/1645]      dependencies:
+[L:1691/1646]        shebang-regex: 3.0.0
+diff --git a/wonderous/src/components/layout/Header.tsx b/wonderous/src/components/layout/Header.tsx
+index adbe0b9..68c97ad 100644
+--- a/wonderous/src/components/layout/Header.tsx
++++ b/wonderous/src/components/layout/Header.tsx
+@@ -1,3 +1,4 @@
+[L:1] +import { Link } from 'react-router-dom'
+[L:2/1]  import logo from '../../assets/logo.jpeg'
+[L:3/2]  import { useMobileMenu } from '../../hooks/useMobileMenu'
+[L:4/3]  import { useScrollHidden } from '../../hooks/useScrollHidden'
+@@ -63,13 +64,13 @@ export function Header() {
+[L:64/63]  
+[L:65/64]        <nav className="main-navbar">
+[L:66/65]          <div className="main-navbar__container">
+[L:66] -          <a className="main-navbar__brand" href="#">
+[L:67] +          <Link className="main-navbar__brand" to="/">
+[L:68/67]              <img className="main-navbar__logo" src={logo} alt="Wondrous Publishing" />
+[L:69/68]              Wondrous Publishing
+[L:69] -          </a>
+[L:70] +          </Link>
+[L:71/70]  
+[L:72/71]            <div className="main-navbar__links">
+[L:72] -            <a className="main-navbar__home cursor-target" href="#" aria-label="Home">
+[L:73] +            <Link className="main-navbar__home cursor-target" to="/" aria-label="Home">
+[L:74/73]                <svg
+[L:75/74]                  width="18"
+[L:76/75]                  height="18"
+@@ -84,7 +85,7 @@ export function Header() {
+[L:85/84]                    strokeLinejoin="round"
+[L:86/85]                  />
+[L:87/86]                </svg>
+[L:87] -            </a>
+[L:88] +            </Link>
+[L:89/88]              <span className="main-navbar__divider" aria-hidden="true" />
+[L:90/89]              {navMenus.map((menu) => (
+[L:91/90]                <NavDropdown
+diff --git a/wonderous/package.json b/wonderous/package.json
+index 016f301..8b01aa1 100644
+--- a/wonderous/package.json
++++ b/wonderous/package.json
+@@ -11,7 +11,8 @@
+[L:11]    },
+[L:12]    "dependencies": {
+[L:13]      "react": "^19.2.7",
+[L:14] -    "react-dom": "^19.2.7"
+[L:14] +    "react-dom": "^19.2.7",
+[L:15] +    "react-router-dom": "^7.18.1"
+[L:16/15]    },
+[L:17/16]    "devDependencies": {
+[L:18/17]      "@eslint/js": "^10.0.1",

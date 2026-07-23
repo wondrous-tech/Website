@@ -1,0 +1,159 @@
+.pneuma-awards {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 96px 64px;
+  background: #fff;
+
+  @media (max-width: 1024px) {
+    padding: 72px 24px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 56px 16px;
+  }
+}
+
+.pneuma-awards__border {
+  display: flex;
+  align-items: flex-start;
+  gap: 64px;
+  align-self: stretch;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 64px;
+  border-top: 2px solid #12a45c;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    gap: 40px;
+  }
+}
+
+.pneuma-awards__intro {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.pneuma-awards__icon {
+  flex-shrink: 0;
+}
+
+.pneuma-awards__title {
+  align-self: stretch;
+  margin: 0;
+  color: #12a45c;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40px;
+}
+
+.pneuma-awards__description {
+  align-self: stretch;
+  margin: 0;
+  padding-bottom: 8px;
+  color: #717974;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.pneuma-awards__cta {
+  display: flex;
+  padding: 12px 32px;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: #735c00;
+  color: #fff;
+  text-align: center;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.pneuma-awards__cta:hover {
+  opacity: 0.85;
+}
+
+.pneuma-awards__cta:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.pneuma-awards__cards {
+  display: flex;
+  flex: 2 0 0;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-self: stretch;
+  }
+}
+
+.pneuma-awards__card {
+  position: relative;
+  flex: 1 0 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #0b713d;
+  border: 1px solid rgba(184, 141, 47, 0.44);
+  box-shadow: 0 18px 34px -28px rgba(3, 61, 34, 0.7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  @media (max-width: 640px) {
+    align-self: stretch;
+  }
+}
+
+.pneuma-awards__card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 22px 40px -24px rgba(3, 61, 34, 0.72);
+}
+
+.pneuma-awards__card-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(3, 61, 34, 0.96) 0%, rgba(18, 164, 92, 0.42) 56%, rgba(184, 141, 47, 0.18) 100%);
+}
+
+.pneuma-awards__card-content {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.pneuma-awards__card-label {
+  color: var(--brand-emerald-bright);
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.pneuma-awards__card-title {
+  margin: 0;
+  color: #fff;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+}

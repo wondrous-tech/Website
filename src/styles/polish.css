@@ -1,0 +1,179 @@
+/* Cross-page polish layer.
+   Targets the shared BEM patterns used by service page heroes and CTAs.
+   Adds subtle motion (reveal-in), refined CTA states, and unified rhythm
+   without editing every component file. Level: subtle (motion 2/5). */
+
+/* ---------- Service hero rhythm ---------- */
+[class$="-hero__container"] {
+  animation: reveal-up 480ms var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)) both;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [class$="-hero__eyebrow"] {
+    animation: reveal-up 420ms var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)) both;
+    animation-delay: 40ms;
+  }
+  [class$="-hero__heading"] {
+    animation: reveal-up 520ms var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)) both;
+    animation-delay: 90ms;
+  }
+  [class$="-hero__subtext"] {
+    animation: reveal-up 520ms var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)) both;
+    animation-delay: 160ms;
+  }
+  [class$="-hero__actions"] {
+    animation: reveal-up 520ms var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)) both;
+    animation-delay: 220ms;
+  }
+}
+
+/* Refined scrim: slightly deeper edge for better heading contrast on photo heroes */
+[class$="-hero__scrim"] {
+  background: linear-gradient(
+    100deg,
+    rgba(245, 240, 224, 0.94) 0%,
+    rgba(245, 240, 224, 0.72) 42%,
+    rgba(245, 240, 224, 0.28) 78%,
+    rgba(245, 240, 224, 0) 100%
+  ) !important;
+  backdrop-filter: saturate(1.05);
+}
+
+/* Refined heading letter-spacing on service heroes */
+[class$="-hero__heading"] {
+  text-wrap: balance;
+}
+
+/* ---------- CTA polish (shared across service pages) ---------- */
+[class$="-hero__cta"],
+[class$="-cta__cta"],
+[class$="__cta"]:not(a):not(button),
+a[class$="-hero__cta"],
+a[class$="-cta__cta"] {
+  transition:
+    transform 220ms var(--ease-out-quart, cubic-bezier(0.25,1,0.5,1)),
+    box-shadow 320ms var(--ease-out-quart, cubic-bezier(0.25,1,0.5,1)),
+    background-color 260ms var(--ease-out-quart, cubic-bezier(0.25,1,0.5,1)),
+    color 260ms var(--ease-out-quart, cubic-bezier(0.25,1,0.5,1)),
+    filter 260ms var(--ease-out-quart, cubic-bezier(0.25,1,0.5,1));
+  will-change: transform;
+}
+
+a[class$="-hero__cta"]:hover,
+a[class$="-cta__cta"]:hover,
+button[class$="-hero__cta"]:hover,
+button[class$="-cta__cta"]:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold-glow, 0 10px 30px -12px rgba(254, 214, 91, 0.55));
+  filter: brightness(1.02);
+}
+
+a[class$="-hero__cta-outline"],
+a[class$="-cta__cta-outline"],
+button[class$="-hero__cta-outline"],
+button[class$="-cta__cta-outline"] {
+  transition:
+    transform 220ms var(--ease-out-quart, cubic-bezier(0.25,1,0.5,1)),
+    border-color 260ms var(--ease-out-quart),
+    background-color 260ms var(--ease-out-quart),
+    color 260ms var(--ease-out-quart);
+}
+
+a[class$="-hero__cta-outline"]:hover,
+a[class$="-cta__cta-outline"]:hover,
+button[class$="-hero__cta-outline"]:hover,
+button[class$="-cta__cta-outline"]:hover {
+  transform: translateY(-2px);
+}
+
+/* ---------- Eyebrow dot: unify subtle pulse ---------- */
+[class$="-hero__eyebrow-dot"] {
+  box-shadow: 0 0 0 0 currentColor;
+}
+
+/* ---------- Card / tile hover across service pages ----------
+   Professional lift: subtle rise, refined shadow, hairline border shift.
+   No color swaps, no bounce — the content stays composed. */
+[class*="__card"],
+[class*="__tile"],
+[class*="__pillar"],
+[class*="__tier"] {
+  transition:
+    transform 380ms var(--ease-out-quart, cubic-bezier(0.25,1,0.5,1)),
+    box-shadow 420ms var(--ease-out-quart, cubic-bezier(0.25,1,0.5,1)),
+    border-color 300ms var(--ease-out-quart);
+}
+
+a[class*="__card"]:hover,
+a[class*="__tile"]:hover,
+button[class*="__card"]:hover,
+button[class*="__tile"]:hover,
+[class*="__card"]:hover:not(section):not(article > .section),
+[class*="__pillar"]:hover,
+[class*="__tier"]:hover {
+  transform: translateY(-3px);
+  border-color: rgba(20, 77, 55, 0.18);
+  box-shadow:
+    0 1px 0 rgba(20, 77, 55, 0.04),
+    0 14px 36px -20px rgba(20, 77, 55, 0.22),
+    0 4px 12px -8px rgba(20, 77, 55, 0.12);
+}
+
+
+/* ---------- Card slide-in on load ----------
+   Cards fade + slide up as their section paints. A short staggered delay
+   (via nth-child) creates a graceful cascade. Respects reduced motion. */
+@keyframes card-slide-in {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [class*="__card"],
+  [class*="__tile"],
+  [class*="__pillar"],
+  [class*="__tier"] {
+    animation: card-slide-in 480ms var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)) both;
+  }
+  [class*="__grid"] > *:nth-child(1),
+  [class*="__cards"] > *:nth-child(1),
+  [class*="__list"]  > *:nth-child(1) { animation-delay: 0ms; }
+  [class*="__grid"] > *:nth-child(2),
+  [class*="__cards"] > *:nth-child(2),
+  [class*="__list"]  > *:nth-child(2) { animation-delay: 60ms; }
+  [class*="__grid"] > *:nth-child(3),
+  [class*="__cards"] > *:nth-child(3),
+  [class*="__list"]  > *:nth-child(3) { animation-delay: 120ms; }
+  [class*="__grid"] > *:nth-child(4),
+  [class*="__cards"] > *:nth-child(4),
+  [class*="__list"]  > *:nth-child(4) { animation-delay: 180ms; }
+  [class*="__grid"] > *:nth-child(5),
+  [class*="__cards"] > *:nth-child(5),
+  [class*="__list"]  > *:nth-child(5) { animation-delay: 220ms; }
+  [class*="__grid"] > *:nth-child(6),
+  [class*="__cards"] > *:nth-child(6),
+  [class*="__list"]  > *:nth-child(6) { animation-delay: 260ms; }
+}
+
+/* ---------- Images inside service sections: crisper, smoother ---------- */
+section img {
+  transition: transform 700ms var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1));
+}
+
+figure:hover img,
+[class*="__media"]:hover img,
+[class*="__thumb"]:hover img {
+  transform: scale(1.03);
+}
+
+/* ---------- Section spacing safety: keep rhythm even on legacy sections ---------- */
+main > section + section {
+  scroll-margin-top: 96px;
+}
+
+/* ---------- Refined selection inside hero copy ---------- */
+[class$="-hero__heading"]::selection,
+[class$="-hero__subtext"]::selection {
+  background: var(--brand-emerald, #12a45c);
+  color: var(--accent-yellow-light, #ffe088);
+}

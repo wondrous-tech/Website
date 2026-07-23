@@ -1,0 +1,203 @@
+.editing-ghostwriting-section {
+  display: flex;
+  justify-content: center;
+  padding: 32px 64px 96px;
+  background: #faf9f5;
+
+  @media (max-width: 1024px) {
+    padding: 32px 40px 64px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 24px 20px 48px;
+  }
+}
+
+.editing-ghostwriting {
+  display: grid;
+  max-width: 1280px;
+  width: 100%;
+  grid-template-columns: 7fr 5fr;
+  gap: 32px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.editing-ghostwriting__card {
+  display: flex;
+  min-height: 332px;
+  border-radius: 8px;
+  background: #12a45c;
+  overflow: hidden;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+}
+
+.editing-ghostwriting__card:hover {
+  box-shadow: 0 24px 48px -20px rgba(20, 77, 55, 0.4);
+  transform: translateY(-4px);
+}
+
+.editing-ghostwriting__image {
+  display: flex;
+  flex: 1 1 0;
+}
+
+.editing-ghostwriting__image img {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+.editing-ghostwriting__content {
+  display: flex;
+  padding: 40px;
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.editing-ghostwriting__title {
+  margin: 0;
+  color: #fff;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40px;
+}
+
+.editing-ghostwriting__description {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.editing-ghostwriting__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--brand-emerald-bright);
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+  text-decoration: none;
+}
+
+.editing-ghostwriting__link:hover {
+  text-decoration: underline;
+}
+
+.editing-ghostwriting__link:focus-visible {
+  outline: 2px solid var(--brand-emerald-bright);
+  outline-offset: 3px;
+}
+
+.editing-ghostwriting__link svg {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.editing-ghostwriting__link:hover svg {
+  transform: translateX(3px);
+}
+
+.editing-ghostwriting__academy {
+  display: flex;
+  min-height: 332px;
+  padding: 40px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-radius: 8px;
+  background: #3e1300;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.editing-ghostwriting__academy:hover {
+  box-shadow: 0 24px 48px -20px rgba(62, 19, 0, 0.45);
+  transform: translateY(-4px);
+}
+
+.editing-ghostwriting__academy-intro {
+  display: flex;
+  padding-bottom: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.editing-ghostwriting__academy-title {
+  margin: 0;
+  color: #fff;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40px;
+}
+
+.editing-ghostwriting__academy-subtitle {
+  margin: 0;
+  color: #e3875d;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.editing-ghostwriting__academy-description {
+  margin: 0;
+  color: #fff;
+  opacity: 0.9;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.editing-ghostwriting__academy-button {
+  display: flex;
+  padding: 12px 40px;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 12px;
+  background: #e3875d;
+  color: #3e1300;
+  text-align: center;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.editing-ghostwriting__academy-button:hover {
+  background: #f0a37f;
+}
+
+.editing-ghostwriting__academy-button:focus-visible {
+  outline: 2px solid var(--brand-emerald-bright);
+  outline-offset: 3px;
+}

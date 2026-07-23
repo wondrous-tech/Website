@@ -1,0 +1,649 @@
+.get-a-quote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 96px 64px;
+  background: linear-gradient(135deg, #f7f1e5 0%, #efe3cf 100%);
+
+  @media (max-width: 1024px) {
+    padding: 72px 24px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 56px 16px;
+  }
+}
+
+.get-a-quote__intro {
+  max-width: 640px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.get-a-quote__title {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: clamp(28px, 3.6vw, 40px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+}
+
+.get-a-quote__description {
+  margin: 12px 0 0;
+  color: var(--text-secondary);
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.get-a-quote__wizard {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: 32px;
+  align-items: start;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.get-a-quote__estimate {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 96px;
+  padding: 32px;
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: var(--header-bg);
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(10px);
+
+  @media (max-width: 1024px) {
+    position: static;
+  }
+}
+
+.get-a-quote__estimate-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--brand-emerald-bright);
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+.get-a-quote__estimate-copy {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.get-a-quote__estimate-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.get-a-quote__estimate-label {
+  color: var(--brand-emerald-bright);
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.get-a-quote__estimate-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.get-a-quote__estimate-select:focus {
+  outline: none;
+  border-color: var(--brand-emerald);
+}
+
+.get-a-quote__estimate-select option {
+  background: #12a45c;
+  color: #fff;
+}
+
+.get-a-quote__estimate-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.get-a-quote__estimate-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.get-a-quote__estimate-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+}
+
+.get-a-quote__estimate-row strong {
+  color: var(--brand-emerald-bright);
+  font-weight: 700;
+}
+
+.get-a-quote__estimate-total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.get-a-quote__estimate-total-label {
+  color: var(--brand-emerald-bright);
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.get-a-quote__estimate-total-value {
+  color: #fff;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.get-a-quote__estimate-total-usd {
+  color: var(--brand-emerald-bright);
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.get-a-quote__estimate-note {
+  margin: 0;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 11px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.get-a-quote__panel {
+  padding: 32px;
+  border-radius: 24px;
+  border: 1px solid rgba(24, 61, 43, 0.12);
+  background: var(--bg-white);
+  box-shadow: var(--shadow-sm);
+
+  @media (max-width: 640px) {
+    padding: 24px;
+  }
+}
+
+.get-a-quote__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.get-a-quote__steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(192, 200, 195, 0.4);
+}
+
+.get-a-quote__step-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.get-a-quote__step-dot {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #efeeea;
+  color: #a4aba6;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.get-a-quote__step-dot--active {
+  background: var(--header-bg);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.get-a-quote__step-dot--done {
+  background: #bcedd7;
+  color: #12a45c;
+}
+
+.get-a-quote__step-label {
+  color: #a4aba6;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+@keyframes get-a-quote-step-in {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.get-a-quote__step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: get-a-quote-step-in 0.3s ease both;
+}
+
+.get-a-quote__step-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #1b1c1a;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.get-a-quote__step-heading svg {
+  color: var(--text-primary);
+}
+
+.get-a-quote__step-copy {
+  margin: -8px 0 0;
+  color: #717974;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.get-a-quote__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.get-a-quote__field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.get-a-quote__label {
+  color: #12a45c;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0.4px;
+}
+
+.get-a-quote__input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(192, 200, 195, 0.6);
+  border-radius: 8px;
+  background: #fff;
+  color: #12a45c;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.get-a-quote__input::placeholder {
+  color: #a4aba6;
+  font-weight: 400;
+}
+
+.get-a-quote__input:focus {
+  outline: none;
+  border-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(254, 214, 91, 0.25);
+}
+
+.get-a-quote__select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23064E3B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.get-a-quote__textarea {
+  resize: vertical;
+  min-height: 96px;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.get-a-quote__choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+}
+
+.get-a-quote__choice-btn {
+  padding: 10px;
+  border: 1px solid rgba(192, 200, 195, 0.6);
+  border-radius: 8px;
+  background: #fff;
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.get-a-quote__choice-btn:hover {
+  background: #efeeea;
+}
+
+.get-a-quote__choice-btn--active {
+  border-color: var(--text-primary);
+  background: var(--header-bg);
+  color: #fff;
+}
+
+.get-a-quote__bonuses {
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(192, 200, 195, 0.4);
+  background: #faf9f5;
+}
+
+.get-a-quote__bonuses-title {
+  margin: 0 0 10px;
+  color: #1b1c1a;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.get-a-quote__bonuses-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.get-a-quote__bonuses-grid span {
+  position: relative;
+  padding-left: 14px;
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.get-a-quote__bonuses-grid span::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--header-bg);
+}
+
+.get-a-quote__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(192, 200, 195, 0.4);
+}
+
+.get-a-quote__back-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #efeeea;
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.get-a-quote__back-btn:hover {
+  background: #e2e0da;
+}
+
+.get-a-quote__next-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: var(--header-bg);
+  color: #fff;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.get-a-quote__next-btn:hover {
+  background: #123f30;
+}
+
+.get-a-quote__submit-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background: var(--brand-emerald);
+  color: #ffffff;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.get-a-quote__submit-btn:hover {
+  background: var(--brand-emerald-bright);
+  box-shadow: 0 4px 12px rgba(254, 214, 91, 0.35);
+  transform: translateY(-1px);
+}
+
+.get-a-quote__disclaimer {
+  align-self: center;
+  margin: 0;
+  color: #a4aba6;
+  text-align: center;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.get-a-quote__success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 0;
+  text-align: center;
+}
+
+.get-a-quote__success-title {
+  margin: 0;
+  color: #12a45c;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+.get-a-quote__success-text {
+  max-width: 420px;
+  margin: 0;
+  color: #717974;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.get-a-quote__success-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  max-width: 420px;
+  padding: 16px;
+  border: 1px solid rgba(192, 200, 195, 0.4);
+  border-radius: 16px;
+  background: #faf9f5;
+  text-align: left;
+}
+
+.get-a-quote__success-summary p {
+  margin: 0;
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.get-a-quote__success-summary span {
+  color: #a4aba6;
+}
+
+.get-a-quote__success-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.get-a-quote__reset-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #efeeea;
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.get-a-quote__reset-btn:hover {
+  background: #e2e0da;
+}
+
+.get-a-quote__whatsapp-btn {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: var(--header-bg);
+  color: #fff;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.get-a-quote__whatsapp-btn:hover {
+  background: #123f30;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .get-a-quote__step-content,
+  .get-a-quote__submit-btn,
+  .get-a-quote__step-dot {
+    animation: none;
+    transition: none;
+  }
+
+  .get-a-quote__submit-btn:hover {
+    transform: none;
+  }
+}

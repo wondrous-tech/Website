@@ -1,0 +1,120 @@
+.blog-hero {
+  display: flex;
+  padding: 96px 64px;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  border-bottom: 1px solid rgba(192, 200, 195, 0.2);
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    padding: 72px 24px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 56px 16px;
+  }
+}
+
+.blog-hero__container {
+  display: flex;
+  max-width: 896px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.blog-hero__eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.blog-hero__divider {
+  width: 32px;
+  height: 1px;
+  background: var(--brand-emerald);
+}
+
+.blog-hero__eyebrow {
+  color: var(--brand-emerald);
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 1.4px;
+}
+
+.blog-hero__heading {
+  margin: 0;
+  color: #1b1c1a;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: clamp(32px, 4.4vw, 48px);
+  font-weight: 600;
+  line-height: 1.17;
+  letter-spacing: -0.96px;
+}
+
+.blog-hero__heading-accent {
+  color: #396756;
+  font-style: italic;
+}
+
+.blog-hero__subtext {
+  max-width: 672px;
+  margin: 0;
+  padding-top: 8px;
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.blog-hero__topics {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.blog-hero__topic {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(20, 77, 55, 0.16);
+  background: #faf9f5;
+  color: #12a45c;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  cursor: default;
+}
+
+.blog-hero__topic:hover {
+  transform: translateY(-2px);
+  border-color: rgba(20, 77, 55, 0.4);
+  background: #fff;
+}
+
+.blog-hero__topic--active {
+  background: #12a45c;
+  color: #f9f7f2;
+  border-color: #12a45c;
+}
+
+.blog-hero__topic-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.55;
+}
+
