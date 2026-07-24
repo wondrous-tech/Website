@@ -172,11 +172,15 @@
   .fbb__pillar { padding: 12px 14px; gap: 12px; grid-template-columns: 36px 1fr; }
   .fbb__pillar-title { font-size: 18px; }
   .fbb__pillar-desc { font-size: 13px; line-height: 1.45; }
-  .fbb__stage { height: min(430px, 70vh); }
-  .fbb__stage-inner { width: 270px; height: 388px; transform: translateY(18px); }
-  .fbb__book-stage { width: 258px; height: 370px; }
+  .fbb__stage { height: min(430px, 70vh); overflow: hidden; }
+  /* Stage matches the book so pages align perfectly inside the cover. */
+  .fbb__stage-inner { width: 260px; height: 372px; transform: translateY(18px); }
+  .fbb__book-stage { width: 260px; height: 372px; }
   .fbb__cover-inner { padding: 42px 24px; }
-  .fbb__cover-title { font-size: 27px; }
+  .fbb__cover-title { font-size: 26px; }
+  .fbb__page { padding: 20px 20px 22px; }
+  .fbb__page-body { font-size: 10.5px; line-height: 1.5; }
+  .fbb__page-heading { font-size: 15px; }
 }
 
 /* ---------- Loose Page ---------- */
@@ -418,12 +422,12 @@
 .fbb__book-shadow {
   position: absolute;
   left: 50%;
-  bottom: -40px;
-  width: 110%;
-  height: 40px;
+  bottom: -30px;
+  width: 108%;
+  height: 42px;
   transform: translateX(-50%);
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, transparent 65%);
-  filter: blur(6px);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.42) 0%, transparent 65%);
+  filter: blur(10px);
 }
 
 /* ---------- Responsive ---------- */
@@ -439,18 +443,30 @@
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  .fbb__stage { order: -1; height: 390px; }
-  .fbb__stage-inner { transform: translateY(0); }
+  .fbb__stage { order: -1; height: 400px; overflow: hidden; }
+  .fbb__stage-inner { transform: translateY(0); width: 250px; height: 358px; }
+  .fbb__book-stage { width: 250px; height: 358px; }
   .fbb__heading { font-size: clamp(28px, 6vw, 40px); }
+  .fbb__spine { width: 36px; }
+  .fbb__cover--front { transform: translateZ(18px); }
+  .fbb__cover--back { transform: translateZ(-18px); }
+  .fbb__pageblock--top,
+  .fbb__pageblock--fore,
+  .fbb__pageblock--bottom { display: none; }
 }
 
 @media (max-width: 560px) {
   .fbb { min-height: 0; }
   .fbb__sticky { padding: 18px 16px; }
-  .fbb__stage-inner { width: 250px; height: 360px; }
-  .fbb__book-stage { width: 240px; height: 340px; }
-  .fbb__cover-inner { padding: 36px 20px; }
-  .fbb__cover-title { font-size: 24px; }
+  .fbb__stage { height: 360px; }
+  .fbb__stage-inner { width: 232px; height: 332px; }
+  .fbb__book-stage { width: 232px; height: 332px; }
+  .fbb__cover-inner { padding: 32px 18px; }
+  .fbb__cover-title { font-size: 22px; }
+  .fbb__cover-author { font-size: 10px; letter-spacing: 4px; }
+  .fbb__page { padding: 18px 16px 20px; }
+  .fbb__page-heading { font-size: 14px; }
+  .fbb__page-body { font-size: 10px; line-height: 1.45; }
   .fbb__pillar { padding: 12px 14px; }
 }
 

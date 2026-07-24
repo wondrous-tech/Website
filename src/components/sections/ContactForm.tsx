@@ -146,7 +146,7 @@ export function ContactForm({ type }: ContactFormProps) {
 
           <label className="contact-form__field contact-form__field--textarea">
             <span className="contact-form__label">
-              {type === 'manuscript' ? 'Synopsis / Notes' : 'Tell us more'}
+              {meta.nda ? 'Synopsis / Notes' : 'Tell us more'}
             </span>
             <textarea
               className="contact-form__input contact-form__textarea"
@@ -156,6 +156,31 @@ export function ContactForm({ type }: ContactFormProps) {
               onChange={(event) => handleChange('message', event.target.value)}
             />
           </label>
+
+          {meta.nda && (
+            <div className="contact-form__nda">
+              <div className="contact-form__nda-copy">
+                <span className="contact-form__label">Protect your work</span>
+                <span className="contact-form__upload-hint">
+                  Download and sign our Non-Disclosure Agreement, then attach it with your
+                  manuscript below.
+                </span>
+              </div>
+              <a
+                className="contact-form__nda-btn"
+                href="/nda/wondrous-publishing-nda.pdf"
+                download="Wondrous-Publishing-NDA.pdf"
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path
+                    d="M8 12L3 7L4.4 5.55L7 8.15V0H9V8.15L11.6 5.55L13 7L8 12ZM2 16C1.45 16 0.979167 15.8042 0.5875 15.4125C0.195833 15.0208 0 14.55 0 14V11H2V14H14V11H16V14C16 14.55 15.8042 15.0208 15.4125 15.4125C15.0208 15.8042 14.55 16 14 16H2Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                Download NDA
+              </a>
+            </div>
+          )}
 
           {meta.upload && (
             <div className="contact-form__upload">

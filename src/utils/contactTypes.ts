@@ -1,13 +1,4 @@
-export type ContactType =
-  | 'general'
-  | 'partnership'
-  | 'printing'
-  | 'editing'
-  | 'branding'
-  | 'finishing'
-  | 'educational'
-  | 'self-publishing'
-  | 'manuscript'
+export type ContactType = 'general' | 'partnership' | 'printing' | 'editing'
 
 export interface ContactTypeMeta {
   id: ContactType
@@ -17,6 +8,7 @@ export interface ContactTypeMeta {
   title: string
   description: string
   submitLabel: string
+  nda?: boolean
   upload?: {
     label: string
     hint?: string
@@ -39,7 +31,8 @@ export const contactTypes: ContactTypeMeta[] = [
     short: 'General',
     eyebrow: 'Phase 01',
     title: 'How Can We Help?',
-    description: 'Questions, feedback, or a note for our editorial desk. We reply within one business day.',
+    description:
+      'Questions, feedback, or a note for our editorial desk. We reply within one business day.',
     submitLabel: 'Send Message',
   },
   {
@@ -48,15 +41,27 @@ export const contactTypes: ContactTypeMeta[] = [
     short: 'Partnership',
     eyebrow: 'Collaborate',
     title: 'Build With Wondrous',
-    description: 'Institutions, agencies, and corporate partners — tell us about the collaboration you envision.',
+    description:
+      'Institutions, agencies, and corporate partners — tell us about the collaboration you envision.',
     submitLabel: 'Request Partnership Call',
     extraFields: [
-      { name: 'organization', label: 'Organization', placeholder: 'Company / Institution', required: true },
+      {
+        name: 'organization',
+        label: 'Organization',
+        placeholder: 'Company / Institution',
+        required: true,
+      },
       {
         name: 'partnershipType',
         label: 'Partnership Type',
         type: 'select',
-        options: ['Co-publishing', 'Distribution', 'Educational Supply', 'Corporate Branding', 'Other'],
+        options: [
+          'Co-publishing',
+          'Distribution',
+          'Educational Supply',
+          'Corporate Branding',
+          'Other',
+        ],
         required: true,
       },
     ],
@@ -67,7 +72,8 @@ export const contactTypes: ContactTypeMeta[] = [
     short: 'Printing',
     eyebrow: 'Estimate',
     title: 'Request a Printing Quote',
-    description: 'Share your specs and we\u2019ll return a tailored quote from our production team.',
+    description:
+      "Share your specs and we\u2019ll return a tailored quote from our production team.",
     submitLabel: 'Request Quote',
     upload: {
       label: 'Attach print-ready file (optional)',
@@ -87,118 +93,35 @@ export const contactTypes: ContactTypeMeta[] = [
   },
   {
     id: 'editing',
-    label: 'Editing Services',
-    short: 'Editing',
+    label: 'Editing & Manuscript Evaluation',
+    short: 'Editing & Manuscript',
     eyebrow: 'Manuscript',
-    title: 'Book an Editorial Evaluation',
-    description: 'Developmental, line, or copy editing \u2014 our editors match the level of care your work requires.',
+    title: 'Editing & Manuscript Evaluation',
+    description:
+      'Developmental, line, or copy editing plus full manuscript evaluation. Please download and sign our NDA before uploading confidential material.',
     submitLabel: 'Book Evaluation',
-    upload: {
-      label: 'Attach manuscript sample',
-      hint: 'DOC, DOCX, or PDF (max ~25MB). Signed NDA welcome.',
-      accept: '.pdf,.doc,.docx',
-    },
-    extraFields: [
-      { name: 'wordCount', label: 'Approx. Word Count', type: 'number', placeholder: 'e.g. 65000' },
-      {
-        name: 'editLevel',
-        label: 'Editing Level',
-        type: 'select',
-        options: ['Developmental', 'Line Editing', 'Copy Editing', 'Proofreading', 'Not Sure'],
-      },
-    ],
-  },
-  {
-    id: 'branding',
-    label: 'Branding & Design',
-    short: 'Branding',
-    eyebrow: 'Identity',
-    title: 'Craft Your Visual Legacy',
-    description: 'Logos, book covers, corporate identity systems and promotional materials.',
-    submitLabel: 'Start Branding Brief',
-    extraFields: [
-      {
-        name: 'brandScope',
-        label: 'Scope',
-        type: 'select',
-        options: ['Book Cover', 'Logo & Identity', 'Marketing Collateral', 'Full Brand System'],
-      },
-    ],
-  },
-  {
-    id: 'finishing',
-    label: 'Finishing Services',
-    short: 'Finishing',
-    eyebrow: 'Post-Press',
-    title: 'Perfect the Final Touch',
-    description: 'Foiling, embossing, lamination, and bespoke finishes for a bookshelf-worthy result.',
-    submitLabel: 'Request Finishing Quote',
-    extraFields: [
-      {
-        name: 'finish',
-        label: 'Desired Finish',
-        type: 'select',
-        options: ['Foil Stamping', 'Embossing', 'Spot UV', 'Soft-Touch Lamination', 'Custom'],
-      },
-    ],
-  },
-  {
-    id: 'educational',
-    label: 'Educational Publishing',
-    short: 'Educational',
-    eyebrow: 'Schools',
-    title: 'Educational Publishing Consultation',
-    description: 'Curriculum-aligned titles, school libraries, and custom learning materials.',
-    submitLabel: 'Request Consultation',
-    extraFields: [
-      { name: 'institution', label: 'Institution', placeholder: 'School / District', required: true },
-      { name: 'gradeLevel', label: 'Grade Level', placeholder: 'e.g. Grade 4 \u2013 6' },
-    ],
-  },
-  {
-    id: 'self-publishing',
-    label: 'Self-Publishing',
-    short: 'Self-Publish',
-    eyebrow: 'Independent',
-    title: 'Publish On Your Terms',
-    description: 'End-to-end guidance for authors publishing under their own imprint.',
-    submitLabel: 'Book a Strategy Call',
-    upload: {
-      label: 'Attach manuscript or brief (optional)',
-      hint: 'DOC, DOCX, PDF, or signed NDA.',
-      accept: '.pdf,.doc,.docx',
-    },
-    extraFields: [
-      { name: 'workingTitle', label: 'Working Title', placeholder: 'Your book title' },
-      {
-        name: 'stage',
-        label: 'Current Stage',
-        type: 'select',
-        options: ['Concept', 'Drafting', 'Manuscript Complete', 'Ready to Print'],
-      },
-    ],
-  },
-  {
-    id: 'manuscript',
-    label: 'Manuscript Submission',
-    short: 'Manuscript',
-    eyebrow: 'Submission',
-    title: 'Submit Your Manuscript',
-    description: 'Share your synopsis with our acquisitions desk. Please sign our NDA before uploading confidential material.',
-    submitLabel: 'Submit Manuscript',
+    nda: true,
     upload: {
       label: 'Attach manuscript & signed NDA',
-      hint: 'DOC, DOCX, or PDF. Please attach your signed NDA together with the manuscript.',
+      hint: 'DOC, DOCX, or PDF (max ~25MB). Include your signed NDA with the manuscript.',
       accept: '.pdf,.doc,.docx',
     },
     extraFields: [
-      { name: 'workingTitle', label: 'Working Title', required: true, placeholder: 'Manuscript title' },
+      { name: 'workingTitle', label: 'Working Title', placeholder: 'Your manuscript title' },
       {
-        name: 'genre',
-        label: 'Genre',
+        name: 'editLevel',
+        label: 'Service Needed',
         type: 'select',
-        options: ['Fiction', 'Non-Fiction', 'Memoir', 'Poetry', 'Children', 'Academic', 'Other'],
+        options: [
+          'Manuscript Evaluation',
+          'Developmental Editing',
+          'Line Editing',
+          'Copy Editing',
+          'Proofreading',
+          'Not Sure',
+        ],
       },
+      { name: 'wordCount', label: 'Approx. Word Count', type: 'number', placeholder: 'e.g. 65000' },
     ],
   },
 ]

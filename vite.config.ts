@@ -12,18 +12,9 @@ export default defineConfig({
   build: {
     target: 'es2020',
     cssCodeSplit: true,
-    minify: 'esbuild',
+    minify: 'oxc',
     sourcemap: false,
     reportCompressedSize: false,
     chunkSizeWarningLimit: 1200,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          react: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-          motion: ['motion'],
-        },
-      },
-    },
   },
 })

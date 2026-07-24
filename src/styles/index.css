@@ -1,3 +1,5 @@
+@import "./ui-polish.css";
+
 :root {
   /* Brand Colors — grounded, editorial, and balanced */
   --header-bg: #ffffff;
@@ -354,5 +356,3 @@ button:active {
   border: 2px solid transparent;
 }
 
-/* UI/UX Polish & Professional Enhancements */
-@import "./ui-polish.css";

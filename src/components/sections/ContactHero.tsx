@@ -22,16 +22,6 @@ function PhoneIcon() {
   )
 }
 
-function DownloadIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M8 12L3 7L4.4 5.55L7 8.15V0H9V8.15L11.6 5.55L13 7L8 12ZM2 16C1.45 16 0.979167 15.8042 0.5875 15.4125C0.195833 15.0208 0 14.55 0 14V11H2V14H14V11H16V14C16 14.55 15.8042 15.0208 15.4125 15.4125C15.0208 15.8042 14.55 16 14 16H2Z"
-        fill="#12a45c"
-      />
-    </svg>
-  )
-}
 
 export function ContactHero() {
   return (
@@ -81,25 +71,6 @@ export function ContactHero() {
         </div>
       </div>
 
-      <div className="contact-nda">
-        <div className="contact-nda__body">
-          <h4 className="contact-nda__title">Protect Your Wisdom</h4>
-          <p className="contact-nda__text">
-            We value intellectual property. Download and sign our Non-Disclosure Agreement, then
-            attach it alongside your submission using the upload field in the relevant form.
-          </p>
-        </div>
-        <div className="contact-nda__actions">
-          <a
-            className="contact-nda__link"
-            href="/nda/wondrous-publishing-nda.pdf"
-            download="Wondrous-Publishing-NDA.pdf"
-          >
-            <DownloadIcon />
-            Download NDA
-          </a>
-        </div>
-      </div>
     </div>
   )
 }

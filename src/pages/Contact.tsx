@@ -4,7 +4,7 @@ import { Header } from '../components/layout/Header'
 import { Footer } from '../components/layout/Footer'
 import { ContactHero } from '../components/sections/ContactHero'
 import { ContactForm } from '../components/sections/ContactForm'
-import { ContactLiveSupport } from '../components/sections/ContactLiveSupport'
+
 import { contactTypes, getContactType, type ContactType } from '../utils/contactTypes'
 import './Contact.css'
 
@@ -60,7 +60,6 @@ export function Contact() {
             </div>
           </div>
         </section>
-        <ContactLiveSupport />
       </main>
       <Footer />
     </>

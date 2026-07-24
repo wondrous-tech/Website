@@ -77,20 +77,21 @@ function Page({
   leaf: (typeof pageLeaves)[number]
 }) {
   const total = pageLeaves.length
-  // Begin as soon as the section enters the viewport, then overlap each leaf
-  // so the binding feels gradual while completing before the final pillar.
-  const start = index * 0.06
-  const settle = start + 0.2
-  const fadeStart = 0.46
-  const fadeEnd = 0.58
+  // Pages arrive gently one after another and are fully settled before the
+  // cover forms, so none of them "fly in" while the book is already visible.
+  const start = index * 0.05
+  const settle = start + 0.16
+  const fadeStart = 0.34
+  const fadeEnd = 0.42
 
-  const yStart = -280 - index * 22
-  const rotStart = index % 2 === 0 ? -20 - index * 3 : 18 + index * 3
-  const xStart = index % 2 === 0 ? -140 - index * 14 : 140 + index * 14
+  // Softer initial offsets so pages never launch from far off-screen on mobile.
+  const yStart = -180 - index * 14
+  const rotStart = index % 2 === 0 ? -14 - index * 2 : 12 + index * 2
+  const xStart = index % 2 === 0 ? -90 - index * 8 : 90 + index * 8
 
   const y = useTransform(progress, [start, settle], [yStart, index * 3])
   const x = useTransform(progress, [start, settle], [xStart, 0])
-  const rot = useTransform(progress, [start, settle], [rotStart, (index - (total - 1) / 2) * 1.6])
+  const rot = useTransform(progress, [start, settle], [rotStart, (index - (total - 1) / 2) * 1.4])
   const opacity = useTransform(
     progress,
     [Math.max(0, start - 0.02), start + 0.06, fadeStart, fadeEnd],
@@ -119,13 +120,13 @@ function Page({
 }
 
 function Book({ progress }: { progress: MotionValue<number> }) {
-  // The cover forms before the last pillar leaves view, not after the sticky
-  // section has already released.
-  const opacity = useTransform(progress, [0.24, 0.4], [0, 1])
-  const scale = useTransform(progress, [0.24, 0.44], [0.78, 1])
-  const rotY = useTransform(progress, [0.24, 0.44], [-48, -22])
-  const rotX = useTransform(progress, [0.24, 0.44], [18, 6])
-  const lift = useTransform(progress, [0.24, 0.44], [44, 6])
+  // The cover forms right after the last loose page settles, so the two
+  // stages never overlap awkwardly on mobile.
+  const opacity = useTransform(progress, [0.36, 0.5], [0, 1])
+  const scale = useTransform(progress, [0.36, 0.54], [0.82, 1])
+  const rotY = useTransform(progress, [0.36, 0.54], [-42, -22])
+  const rotX = useTransform(progress, [0.36, 0.54], [16, 6])
+  const lift = useTransform(progress, [0.36, 0.54], [36, 6])
 
 
   return (
@@ -142,14 +143,14 @@ function Book({ progress }: { progress: MotionValue<number> }) {
               <div className="fbb__cover-rule" />
               <div className="fbb__cover-title">The Lighthouse</div>
               <div className="fbb__cover-subtitle">— a novel —</div>
-              <div className="fbb__cover-author">Elena Verne</div>
+              <div className="fbb__cover-author">Wonderous Editor</div>
             </div>
             <div className="fbb__cover-corner">✦</div>
             <div className="fbb__cover-sheen" />
           </div>
           <div className="fbb__spine">
             <span className="fbb__spine-mark">✦</span>
-            <span className="fbb__spine-title">The Lighthouse · E. Verne</span>
+            <span className="fbb__spine-title">The Lighthouse · Wonderous Editor</span>
             <span className="fbb__spine-mark">✦</span>
           </div>
           <div className="fbb__cover fbb__cover--back" />

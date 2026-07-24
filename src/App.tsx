@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import { useScrollToHash } from './hooks/useScrollToHash'
 import { useSectionReveal } from './hooks/useSectionReveal'
 import { PageTransition } from './components/common/PageTransition'
+import { ChatWidget } from './components/chat/ChatWidget'
 import { Home } from './pages/Home'
 
 const AboutUs = lazy(() => import('./pages/AboutUs').then((m) => ({ default: m.AboutUs })))
@@ -51,6 +52,7 @@ function App() {
           <Route path="/marketplace" element={<Marketplace />} />
         </Routes>
       </Suspense>
+      <ChatWidget />
     </>
   )
 }
