@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 120px 64px;
-  background: #ffffff;
+  padding: clamp(80px, 12vh, 140px) clamp(24px, 6vw, 80px);
+  background: #fbf8f1;
 
   @media (max-width: 1024px) {
     padding: 88px 24px;
@@ -18,9 +18,9 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 72px;
+  gap: 64px;
   width: 100%;
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -29,24 +29,45 @@
   flex-direction: column;
   align-items: center;
   align-self: stretch;
-  gap: 12px;
+  gap: 16px;
+  position: relative;
+}
+
+.services__intro::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: rgba(201, 168, 76, 0.55);
+  margin-top: 4px;
 }
 
 .services__eyebrow {
-  color: #12a45c;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #8a6517;
   font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 5px;
+  letter-spacing: 4px;
   text-transform: uppercase;
+}
+
+.services__eyebrow::before,
+.services__eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: rgba(201, 168, 76, 0.55);
 }
 
 .services__title {
   margin: 0;
-  color: #12a45c;
+  color: #0e2a20;
   text-align: center;
   font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: clamp(42px, 5.6vw, 68px);
+  font-size: clamp(38px, 5.2vw, 62px);
   font-style: italic;
   font-weight: 500;
   line-height: 1.05;
@@ -55,11 +76,11 @@
 
 .services__description {
   margin: 0;
-  max-width: 520px;
+  max-width: 560px;
   color: #4a5451;
   text-align: center;
   font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 400;
   line-height: 1.5;
 }
@@ -69,7 +90,7 @@
   grid-template-columns: repeat(4, 1fr);
   align-items: stretch;
   align-self: stretch;
-  gap: 28px;
+  gap: 20px;
 
   @media (max-width: 1180px) {
     grid-template-columns: repeat(2, 1fr);
@@ -88,61 +109,64 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
-  padding: 40px;
-  border: 1px solid rgba(18, 164, 92, 0.16);
-  border-radius: var(--radius-xl);
-  background: var(--bg-white);
-  box-shadow: inset 0 3px 0 rgba(18, 164, 92, 0.9), var(--shadow-xs);
+  padding: 32px 28px;
+  border: 1px dashed rgba(201, 168, 76, 0.5);
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: none;
   transition:
     transform 0.4s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
-    box-shadow 0.4s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
-    border-color 0.4s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+    border-color 0.3s ease,
+    background-color 0.3s ease;
 }
 
 .services__card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(184, 141, 47, 0.55);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  border-style: solid;
+  border-color: rgba(14, 58, 41, 0.9);
 }
 
 .services__icon {
   display: flex;
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background: rgba(18, 164, 92, 0.09);
-  border: 1px solid rgba(18, 164, 92, 0.18);
+  background: transparent;
+  border: 1px solid rgba(201, 168, 76, 0.55);
   transition:
     transform 0.4s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
-    background-color 0.4s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .services__icon svg {
-  width: 22px;
+  width: 20px;
   height: auto;
 }
 
 .services__icon svg path {
-  transition: fill 0.4s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+  transition: fill 0.3s ease;
 }
 
 .services__card:hover .services__icon {
-  transform: scale(1.08) rotate(6deg);
-  background: linear-gradient(135deg, #12a45c 0%, #0b713d 65%, #b88d2f 160%);
+  transform: scale(1.06);
+  background: #0e3a29;
+  border-color: #0e3a29;
 }
 
 .services__card:hover .services__icon svg path {
-  fill: #fff;
+  fill: #f6f1e6;
 }
 
 .services__card-title {
   margin: 0;
   padding-top: 4px;
-  color: #12a45c;
+  color: #0e2a20;
   font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 28px;
+  font-size: 26px;
+  font-style: italic;
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.3px;
@@ -150,8 +174,10 @@
 }
 
 .services__card:hover .services__card-title {
-  color: #8a6517;
+  color: #12a45c;
 }
+
+
 
 .services__card-description {
   margin: 0;

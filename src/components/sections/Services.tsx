@@ -8,7 +8,7 @@ function CheckIcon() {
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M5.01667 8.51667L9.12917 4.40417L8.3125 3.5875L5.01667 6.88333L3.35417 5.22083L2.5375 6.0375L5.01667 8.51667ZM5.83333 11.6667C3.06667 11.6667 0 9.06667 0 5.83333C0 2.6 2.6 0 5.83333 0S11.6667 2.6 11.6667 5.83333 9.06667 11.6667 5.83333 11.6667Z"
-        fill="#735C00"
+        fill="#8a6517"
       />
     </svg>
   )
@@ -17,10 +17,11 @@ function CheckIcon() {
 function ArrowIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M1.4 15L0 13.6L11.6 2H5V0H15V10H13V3.4L1.4 15Z" fill="#12a45c" />
+      <path d="M1.4 15L0 13.6L11.6 2H5V0H15V10H13V3.4L1.4 15Z" fill="#0e3a29" />
     </svg>
   )
 }
+
 
 const gridVariants = {
   hidden: {},

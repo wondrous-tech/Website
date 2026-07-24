@@ -1,7 +1,9 @@
 .philosophy {
   position: relative;
-  background: linear-gradient(90deg, #0a2a1e 0%, #0e3a29 25%, #12a45c 55%, #0e3a29 85%, #0a2a1e 100%);
+  background: #f8f4ea;
   overflow: hidden;
+  border-top: 1px solid rgba(201, 168, 76, 0.18);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.18);
 }
 
 .philosophy__watermark {
@@ -11,7 +13,7 @@
   height: 100%;
   object-fit: cover;
   object-position: right center;
-  opacity: 0.12;
+  opacity: 0.05;
   pointer-events: none;
   z-index: 0;
   animation: philosophy-drift 24s ease-in-out infinite alternate;
@@ -26,8 +28,7 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(50% 90% at 100% 50%, rgba(20, 77, 55, 0.45) 0%, rgba(20, 77, 55, 0.88) 100%),
-    linear-gradient(90deg, rgba(20, 77, 55, 0.92) 0%, rgba(20, 77, 55, 0.65) 100%);
+    radial-gradient(60% 100% at 100% 50%, rgba(246, 241, 230, 0) 0%, rgba(246, 241, 230, 0.9) 100%);
   z-index: 0;
 }
 
@@ -37,24 +38,25 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 28px;
+  gap: 40px;
   width: 100%;
-  max-width: 1280px;
-  min-height: clamp(180px, 22vh, 240px);
+  max-width: 1180px;
+  min-height: clamp(200px, 26vh, 280px);
   margin: 0 auto;
-  padding: clamp(38px, 5vh, 60px) clamp(20px, 4vw, 48px);
+  padding: clamp(56px, 8vh, 96px) clamp(24px, 6vw, 80px);
 }
 
 .philosophy__mark {
   position: absolute;
-  left: clamp(12px, 3vw, 32px);
+  left: clamp(12px, 3vw, 40px);
   top: 50%;
-  transform: translateY(-55%);
+  transform: translateY(-58%);
   font-family: 'EB Garamond', Georgia, serif;
-  font-size: clamp(64px, 10vw, 120px);
-  font-weight: 700;
+  font-size: clamp(120px, 16vw, 200px);
+  font-weight: 500;
+  font-style: italic;
   line-height: 1;
-  color: rgba(201, 168, 76, 0.08);
+  color: rgba(14, 42, 32, 0.045);
   pointer-events: none;
   user-select: none;
   z-index: 0;
@@ -65,44 +67,45 @@
   z-index: 1;
   display: flex;
   align-items: baseline;
-  gap: 14px;
+  gap: 18px;
   flex-wrap: wrap;
-  padding-left: 16px;
-  border-left: 2px solid rgba(201, 168, 76, 0.45);
+  padding-left: 20px;
+  border-left: 1px solid rgba(201, 168, 76, 0.55);
 }
 
 .philosophy__quote {
   margin: 0;
-  color: rgba(255, 255, 255, 0.93);
+  color: #0e2a20;
   font-family: 'EB Garamond', Georgia, serif;
-  font-size: clamp(15px, 1.6vw, 20px);
+  font-size: clamp(20px, 2.2vw, 30px);
   font-style: italic;
   font-weight: 400;
-  line-height: 1.4;
-  letter-spacing: 0.2px;
+  line-height: 1.35;
+  letter-spacing: -0.1px;
   text-wrap: balance;
+  max-width: 640px;
 }
 
 .philosophy__cite {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  color: var(--accent-gold);
+  gap: 12px;
+  color: #8a6517;
   font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 10px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
 .philosophy__cite-line {
   display: inline-block;
-  width: 20px;
+  width: 28px;
   height: 1px;
-  background: rgba(201, 168, 76, 0.5);
+  background: rgba(201, 168, 76, 0.7);
 }
 
 .philosophy__cta {
@@ -110,47 +113,43 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 9px 22px;
+  padding: 11px 24px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #0e3a29;
+  background: transparent;
   color: #0e3a29;
   font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
-  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
 .philosophy__cta:hover {
-  background: #fff;
-  border-color: rgba(255, 255, 255, 0.45);
+  background: #0e3a29;
+  color: #f6f1e6;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px -4px rgba(2, 44, 34, 0.35);
 }
 
-.philosophy__cta svg {
-  flex-shrink: 0;
-}
+.philosophy__cta svg { flex-shrink: 0; }
 
 @media (max-width: 768px) {
   .philosophy__inner {
     flex-direction: column;
     align-items: flex-start;
-    gap: 14px;
-    padding: 22px clamp(16px, 4vw, 24px);
+    gap: 20px;
+    padding: 40px clamp(20px, 5vw, 28px);
   }
 
   .philosophy__body {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
-    padding-left: 14px;
+    gap: 12px;
+    padding-left: 16px;
   }
 
-  .philosophy__cite {
-    white-space: normal;
-  }
+  .philosophy__cite { white-space: normal; }
 }
