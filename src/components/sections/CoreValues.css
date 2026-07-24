@@ -142,7 +142,7 @@
   display: flex;
   flex-direction: column;
   padding: 36px 28px;
-  border-radius: 16px;
+  border-radius: 4px;
   border: 1px solid var(--border-light, #ece8de);
   background: var(--bg-white, #ffffff);
   box-shadow: var(--shadow-xs);
@@ -154,10 +154,44 @@
   overflow: hidden;
 }
 
+.core-values__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand-emerald, #12a45c), var(--accent-gold, #d4b350));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.6s var(--ease-out-expo);
+}
+
+.core-values__card::after {
+  content: '';
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 24px;
+  height: 24px;
+  border-right: 1px solid rgba(212, 179, 80, 0.4);
+  border-bottom: 1px solid rgba(212, 179, 80, 0.4);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out-expo);
+}
+
 .core-values__card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
   box-shadow: var(--shadow-lg);
   border-color: rgba(212, 179, 80, 0.35);
+}
+
+.core-values__card:hover::before {
+  transform: scaleX(1);
+}
+
+.core-values__card:hover::after {
+  opacity: 1;
 }
 
 .core-values__card-top {
@@ -192,11 +226,12 @@
 
 .core-values__card-number {
   font-family: 'EB Garamond', -apple-system, serif;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 500;
   font-style: italic;
   color: var(--accent-gold, #d4b350);
-  opacity: 0.85;
+  opacity: 0.9;
+  letter-spacing: 1px;
 }
 
 .core-values__card-content {
@@ -209,9 +244,10 @@
   margin: 0;
   color: var(--brand-emerald, #12a45c);
   font-family: 'EB Garamond', -apple-system, serif;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 600;
   line-height: 1.25;
+  letter-spacing: -0.3px;
 }
 
 .core-values__card-desc {

@@ -6,7 +6,9 @@ export function OurNarrative() {
       <div className="our-narrative__container">
         <div className="our-narrative__intro-block">
           <span className="our-narrative__eyebrow">Our Story</span>
-          <h2 className="our-narrative__heading">Publishing Futures, One Destiny at a Time</h2>
+          <h2 className="our-narrative__heading">
+            Publishing <em className="our-narrative__heading-accent">Futures</em>, One Destiny at a Time
+          </h2>
           <div className="our-narrative__underline" aria-hidden="true" />
 
           <p className="our-narrative__intro">
@@ -39,6 +41,7 @@ export function OurNarrative() {
 
         <div className="our-narrative__columns">
           <div className="our-narrative__column">
+            <span className="our-narrative__column-tag">01 — Vision</span>
             <svg
               className="our-narrative__icon"
               width="28"
@@ -59,6 +62,7 @@ export function OurNarrative() {
           </div>
 
           <div className="our-narrative__column">
+            <span className="our-narrative__column-tag">02 — Mission</span>
             <svg
               className="our-narrative__icon"
               width="28"
@@ -80,6 +84,23 @@ export function OurNarrative() {
             <p className="our-narrative__column-text">
               To discover, publish, and promote high-impact destiny-focused works that inspire personal growth, unlock human potential, and influence generations. We are committed to providing authors with a platform to share life-changing wisdom and to equipping readers with knowledge that drives lasting transformation.
             </p>
+          </div>
+        </div>
+
+        <div className="our-narrative__experience" aria-label="Our track record">
+          <div className="our-narrative__experience-item">
+            <span className="our-narrative__experience-num">100+</span>
+            <span className="our-narrative__experience-label">Titles Published</span>
+          </div>
+          <span className="our-narrative__experience-divider" aria-hidden="true" />
+          <div className="our-narrative__experience-item">
+            <span className="our-narrative__experience-num">5y</span>
+            <span className="our-narrative__experience-label">Editorial Craft</span>
+          </div>
+          <span className="our-narrative__experience-divider" aria-hidden="true" />
+          <div className="our-narrative__experience-item">
+            <span className="our-narrative__experience-num">Pan-African</span>
+            <span className="our-narrative__experience-label">Reach &amp; Voice</span>
           </div>
         </div>
       </div>

@@ -58,6 +58,23 @@
   }
 }
 
+.our-narrative__heading-accent {
+  color: #c9a84c;
+  font-style: italic;
+  position: relative;
+  white-space: nowrap;
+}
+
+.our-narrative__heading-accent::after {
+  content: '';
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: 0.05em;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(201,168,76,0), rgba(201,168,76,0.9), rgba(201,168,76,0));
+}
+
 .our-narrative__underline {
   width: 64px;
   height: 3px;
@@ -170,6 +187,91 @@
   padding: 32px;
   border-radius: 12px;
   border: 1px solid #e3e2df;
+  position: relative;
+  transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.our-narrative__column::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 24px;
+  bottom: 24px;
+  width: 3px;
+  background: #c9a84c;
+  border-radius: 3px;
+  opacity: 0.85;
+}
+
+.our-narrative__column:hover {
+  transform: translateY(-3px);
+  border-color: rgba(14, 58, 41, 0.5);
+  box-shadow: 0 18px 40px -28px rgba(20, 77, 55, 0.35);
+}
+
+.our-narrative__column-tag {
+  color: #8a6517;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.our-narrative__experience {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 16px;
+  width: 100%;
+  padding: 28px 32px;
+  margin-top: 8px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #0e3a29 0%, #0b2f21 100%);
+  color: #fbf8f1;
+
+  @media (max-width: 640px) {
+    padding: 22px 16px;
+    gap: 8px;
+  }
+}
+
+.our-narrative__experience-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  min-width: 0;
+}
+
+.our-narrative__experience-num {
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-style: italic;
+  font-size: clamp(22px, 5vw, 30px);
+  font-weight: 500;
+  color: #e9c349;
+  line-height: 1;
+}
+
+.our-narrative__experience-label {
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: rgba(251, 248, 241, 0.75);
+
+  @media (max-width: 480px) {
+    letter-spacing: 1.4px;
+    font-size: 9px;
+  }
+}
+
+.our-narrative__experience-divider {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(233, 195, 73, 0.25);
 }
 
 .our-narrative__icon {

@@ -1,39 +1,32 @@
 import './AboutHero.css'
+import aboutHeroBg from '../../assets/about-hero-bg.png'
 
 export function AboutHero() {
   return (
-    <section className="about-hero">
+    <section
+      className="about-hero"
+      style={{ backgroundImage: `url(${aboutHeroBg})` }}
+    >
       <div className="about-hero__scrim" aria-hidden="true" />
+      <div className="about-hero__vignette" aria-hidden="true" />
 
-      <div className="about-hero__container">
-        <span className="about-hero__eyebrow">
-          <span className="about-hero__eyebrow-rule" aria-hidden="true" />
-          A Visionary Narrative
-        </span>
+      <div className="about-hero__inner">
+        <h1 className="about-hero__heading about-hero__anim" style={{ ['--d' as string]: '0ms' }}>
+          <span className="about-hero__word">About</span>
+          <span className="about-hero__word about-hero__word--accent">
+            Us<span className="about-hero__word-dot" aria-hidden="true" />
+          </span>
+        </h1>
 
-        <h1 className="about-hero__heading">About Us</h1>
-
-        <p className="about-hero__lede">
+        <p className="about-hero__lede about-hero__anim" style={{ ['--d' as string]: '180ms' }}>
           Wondrous Publishing is a visionary Pan-African publishing house dedicated to
           discovering, nurturing, and promoting transformative voices across the continent.
         </p>
 
-        <p className="about-hero__quote">
+        <p className="about-hero__quote about-hero__anim" style={{ ['--d' as string]: '340ms' }}>
           "Engineering platforms for destiny-shaping and intellectual actualization."
         </p>
       </div>
-
-      <svg
-        className="about-hero__scroll-cue"
-        width="18"
-        height="9"
-        viewBox="0 0 18 9"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <path d="M9 5.55L0 1.05L1.05 0L9 3.45L16.95 0L18 1.05L9 5.55Z" fill="white" fillOpacity="0.5" />
-      </svg>
     </section>
   )
 }
