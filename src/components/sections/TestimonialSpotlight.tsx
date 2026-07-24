@@ -40,15 +40,31 @@ const AUTOPLAY_MS = 5000
 
 export function TestimonialSpotlight() {
   const [index, setIndex] = useState(0)
+  const [prevIndex, setPrevIndex] = useState<number | null>(null)
   const [paused, setPaused] = useState(false)
 
   useEffect(() => {
     if (paused) return
     const t = window.setInterval(() => {
-      setIndex((i) => (i + 1) % testimonials.length)
+      setIndex((i) => {
+        setPrevIndex(i)
+        return (i + 1) % testimonials.length
+      })
     }, AUTOPLAY_MS)
     return () => window.clearInterval(t)
   }, [paused])
+
+  useEffect(() => {
+    if (prevIndex === null) return
+    const t = window.setTimeout(() => setPrevIndex(null), 1200)
+    return () => window.clearTimeout(t)
+  }, [prevIndex, index])
+
+  const goTo = (i: number) => {
+    if (i === index) return
+    setPrevIndex(index)
+    setIndex(i)
+  }
 
   return (
     <section className="testimonial-spotlight">
@@ -62,12 +78,21 @@ export function TestimonialSpotlight() {
           onMouseLeave={() => setPaused(false)}
           aria-live="polite"
         >
-          <div
-            className="testimonial-spotlight__track"
-            style={{ ['--offset' as string]: index }}
-          >
-            {testimonials.map((t, i) => (
-              <figure key={i} className="testimonial-spotlight__card">
+          <div className="testimonial-spotlight__stage">
+            {testimonials.map((t, i) => {
+              const isActive = i === index
+              const isLeaving = i === prevIndex
+              const stateClass = isActive
+                ? ' testimonial-spotlight__card--active'
+                : isLeaving
+                  ? ' testimonial-spotlight__card--leaving'
+                  : ''
+              return (
+              <figure
+                key={i}
+                className={`testimonial-spotlight__card${stateClass}`}
+                aria-hidden={!isActive}
+              >
                 <svg
                   className="testimonial-spotlight__quote-mark"
                   width="43"
@@ -93,7 +118,8 @@ export function TestimonialSpotlight() {
                   </div>
                 </figcaption>
               </figure>
-            ))}
+              )
+            })}
           </div>
         </div>
 
@@ -106,7 +132,7 @@ export function TestimonialSpotlight() {
               aria-selected={i === index}
               aria-label={`Show testimonial ${i + 1}`}
               className={`testimonial-spotlight__dot${i === index ? ' testimonial-spotlight__dot--active' : ''}`}
-              onClick={() => setIndex(i)}
+              onClick={() => goTo(i)}
             />
           ))}
         </div>

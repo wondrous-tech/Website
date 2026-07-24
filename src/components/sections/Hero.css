@@ -100,10 +100,29 @@
   to   { transform: translateX(100%); }
 }
 
-.hero__slide--enter-next  { animation: hero-enter-from-right 0.7s cubic-bezier(0.65, 0, 0.35, 1) both; }
-.hero__slide--leave-next  { animation: hero-leave-to-left    0.7s cubic-bezier(0.65, 0, 0.35, 1) both; }
-.hero__slide--enter-prev  { animation: hero-enter-from-left  0.7s cubic-bezier(0.65, 0, 0.35, 1) both; }
-.hero__slide--leave-prev  { animation: hero-leave-to-right   0.7s cubic-bezier(0.65, 0, 0.35, 1) both; }
+.hero__slide--enter-next  { animation: hero-enter-from-right 1.15s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero__slide--leave-next  { animation: hero-leave-to-left    1.15s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero__slide--enter-prev  { animation: hero-enter-from-left  1.15s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero__slide--leave-prev  { animation: hero-leave-to-right   1.15s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Gentle content rise on the entering slide for a softer feel */
+.hero__slide--enter-next .hero__card,
+.hero__slide--enter-prev .hero__card {
+  animation: hero-card-rise 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+.hero__slide--enter-next .hero__visual,
+.hero__slide--enter-prev .hero__visual {
+  animation: hero-visual-rise 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes hero-card-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-visual-rise {
+  from { opacity: 0.4; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .hero__slide--enter-next,

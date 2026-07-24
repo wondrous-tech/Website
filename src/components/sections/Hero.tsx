@@ -4,7 +4,7 @@ import { heroSlides } from '../../utils/heroSlides'
 import './Hero.css'
 
 const AUTOPLAY_MS = 6500
-const TRANSITION_MS = 700
+const TRANSITION_MS = 1150
 
 export function Hero() {
   const [activeIndex, setActiveIndex] = useState(0)

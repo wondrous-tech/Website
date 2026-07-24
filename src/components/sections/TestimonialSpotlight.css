@@ -47,46 +47,63 @@
 .testimonial-spotlight__viewport {
   position: relative;
   width: 100%;
-  height: 340px;
-  --card-h: 340px;
-  overflow: hidden;
-  mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
-
-  @media (max-width: 640px) {
-    height: 400px;
-    --card-h: 400px;
-  }
+  overflow: visible;
 }
 
-.testimonial-spotlight__track {
-  display: flex;
-  flex-direction: column;
+.testimonial-spotlight__stage {
+  display: grid;
   width: 100%;
-  transform: translateY(calc(var(--offset, 0) * var(--card-h) * -1));
-  transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.testimonial-spotlight__stage > * {
+  grid-area: 1 / 1;
 }
 
 .testimonial-spotlight__card {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 28px;
-  flex: 0 0 100%;
-  height: 340px;
   margin: 0;
   padding: 40px 48px;
-  border: 1px solid rgba(201, 168, 76, 0.35);
-  background: #ffffff;
-  box-shadow: 0 16px 38px -30px rgba(3, 61, 34, 0.4);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  border-radius: 6px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbf9f2 100%);
+  box-shadow:
+    0 22px 44px -28px rgba(3, 61, 34, 0.28),
+    0 2px 6px -3px rgba(3, 61, 34, 0.08);
   box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(40px);
+  pointer-events: none;
 
   @media (max-width: 640px) {
     padding: 28px 22px;
-    height: 400px;
     gap: 20px;
   }
+}
+
+.testimonial-spotlight__card--active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition:
+    opacity 1.1s ease,
+    transform 1.15s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0s;
+  pointer-events: auto;
+}
+
+.testimonial-spotlight__card--leaving {
+  opacity: 0;
+  visibility: visible;
+  transform: translateY(-48px);
+  transition:
+    opacity 1.1s ease,
+    transform 1.15s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 1.15s;
+  pointer-events: none;
 }
 
 .testimonial-spotlight__quote-mark {
