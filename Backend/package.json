@@ -1,0 +1,21 @@
+{
+  "name": "wondrous-backend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Standalone Express API for Wondrous Publishing (messages, file uploads, Groq chat).",
+  "type": "module",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "multer": "^2.0.2"
+  }
+}

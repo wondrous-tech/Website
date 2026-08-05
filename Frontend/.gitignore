@@ -27,3 +27,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Uploaded files & local API data
+uploads/*
+!uploads/.gitkeep
+# backend/ has its own .gitignore for uploads and data

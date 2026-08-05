@@ -1,5 +1,6 @@
 import { useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 import { getContactType, type ContactTypeMeta } from '../../utils/contactTypes'
+import { sendMessage, uploadFile } from '../../services/api'
 import './ContactForm.css'
 
 interface ContactFormProps {
@@ -23,10 +24,10 @@ export function ContactForm({ type }: ContactFormProps) {
   const meta = getContactType(type)
   const [form, setForm] = useState<Record<string, string>>(baseState)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSending, setIsSending] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [uploadedFile, setUploadedFile] = useState<File | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
-
-
 
   const isValid =
     form.name.trim().length > 0 &&
@@ -43,9 +44,40 @@ export function ContactForm({ type }: ContactFormProps) {
     setUploadedFile(event.target.files?.[0] ?? null)
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    setIsSubmitted(true)
+    if (!isValid || isSending) return
+    setIsSending(true)
+    setError(null)
+
+    try {
+      let fileUrl = ''
+      if (uploadedFile) {
+        const uploaded = await uploadFile(uploadedFile)
+        fileUrl = uploaded.url
+      }
+
+      const fields: Record<string, string> = {}
+      for (const field of meta.extraFields ?? []) {
+        if (form[field.name]) fields[field.name] = form[field.name]
+      }
+
+      await sendMessage({
+        source: 'contact',
+        type: meta.id,
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        message: form.message,
+        fileUrl,
+        fields,
+      })
+      setIsSubmitted(true)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+    } finally {
+      setIsSending(false)
+    }
   }
 
   return (
@@ -69,6 +101,8 @@ export function ContactForm({ type }: ContactFormProps) {
             className="contact-form-card__reset-btn"
             onClick={() => {
               setForm(baseState)
+              setUploadedFile(null)
+              setError(null)
               setIsSubmitted(false)
             }}
           >
@@ -216,8 +250,18 @@ export function ContactForm({ type }: ContactFormProps) {
             </div>
           )}
 
-          <button type="submit" className="contact-form__submit-btn" disabled={!isValid}>
-            {meta.submitLabel}
+          {error && (
+            <p className="contact-form__error" role="alert">
+              {error}
+            </p>
+          )}
+
+          <button
+            type="submit"
+            className="contact-form__submit-btn"
+            disabled={!isValid || isSending}
+          >
+            {isSending ? 'Sending…' : meta.submitLabel}
             <ArrowIcon />
           </button>
         </form>

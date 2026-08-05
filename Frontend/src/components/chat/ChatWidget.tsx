@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 
+import { sendChat, sendMessage, type ChatTurn } from '../../services/api'
 import './ChatWidget.css'
 
 const WHATSAPP_NUMBER = '254798872998'
@@ -156,12 +157,35 @@ export function ChatWidget() {
     }, delay)
   }
 
-  function handleSend(text: string) {
+  async function handleSend(text: string) {
     const trimmed = text.trim()
     if (!trimmed) return
-    setMessages((prev) => [...prev, { id: makeId(), from: 'user', kind: 'text', text: trimmed }])
+    const userMsg: ChatMessage = { id: makeId(), from: 'user', kind: 'text', text: trimmed }
+    const history: ChatTurn[] = [...messages, userMsg]
+      .filter((m) => m.kind === 'text' && m.text)
+      .map((m) => ({ role: m.from === 'user' ? 'user' : 'assistant', content: m.text as string }))
+
+    setMessages((prev) => [...prev, userMsg])
     setInput('')
-    pushBot(botReply(trimmed))
+    setTyping(true)
+
+    try {
+      const reply = await sendChat(history)
+      setTyping(false)
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: makeId(),
+          from: 'bot',
+          kind: 'text',
+          text: reply,
+          suggestions: ['Open contact form', 'Chat on WhatsApp'],
+        },
+      ])
+    } catch {
+      setTyping(false)
+      pushBot(botReply(trimmed), 200)
+    }
   }
 
   function handleSuggestion(label: string) {
@@ -181,7 +205,21 @@ export function ChatWidget() {
     }
   }
 
-  function handleInlineFormSubmit(state: InlineFormState) {
+  async function handleInlineFormSubmit(state: InlineFormState) {
+    let saved = true
+    try {
+      await sendMessage({
+        source: 'chat',
+        type: state.topic,
+        name: state.name,
+        email: state.email,
+        topic: state.topic,
+        message: state.message,
+      })
+    } catch {
+      saved = false
+    }
+
     setMessages((prev) => [
       ...prev.map((m) =>
         m.kind === 'form' ? { ...m, kind: 'form-success' as MessageKind, text: undefined } : m,
@@ -196,7 +234,9 @@ export function ChatWidget() {
         id: makeId(),
         from: 'bot',
         kind: 'text',
-        text: `Thanks ${state.name.split(' ')[0] || 'friend'}, we\u2019ve got your details. Someone from our ${state.topic.toLowerCase()} desk will be in touch. In the meantime, feel free to keep chatting.`,
+        text: saved
+          ? `Thanks ${state.name.split(' ')[0] || 'friend'}, we\u2019ve got your details. Someone from our ${state.topic.toLowerCase()} desk will be in touch. In the meantime, feel free to keep chatting.`
+          : 'Sorry, we could not save your details just now. Please try again or continue on WhatsApp.',
         suggestions: ['Chat on WhatsApp'],
       },
     ])
