@@ -24,16 +24,9 @@ function absolute(path: string) {
   return typeof window === 'undefined' ? resolved : `${window.location.origin}${resolved}`
 }
 
-/**
- * Fire-and-forget: never blocks or fails the user's submission.
- *
- * Web3Forms' free plan rejects server-to-server calls, and their AJAX
- * endpoint can be blocked by bot filtering, so we do a classic HTML form
- * POST into a hidden iframe. That is a plain browser navigation (no CORS,
- * no XHR), which Web3Forms always accepts.
- */
+/** Sends the notification directly from the browser using Web3Forms' AJAX API. */
 export async function notifyByEmail(payload: MessagePayload, reference?: string) {
-  if (typeof document === 'undefined') return false
+  if (typeof window === 'undefined') return false
 
   const link = absolute(payload.fileUrl ?? '')
 
@@ -63,56 +56,17 @@ export async function notifyByEmail(payload: MessagePayload, reference?: string)
     message: body,
   }
 
-  // Preferred path: real POST from the browser. Works on any hosted domain
-  // (Railway included) and never turns into a GET.
-  try {
-    const response = await fetch(WEB3FORMS_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(fields),
-    })
-    const data = await response.json().catch(() => ({}))
-    if (response.ok && data?.success !== false) return true
-  } catch {
-    // fall through to the hidden-iframe fallback below
+  const response = await fetch(WEB3FORMS_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(fields),
+  })
+  const data = await response.json().catch(() => ({}))
+
+  if (!response.ok || data?.success === false) {
+    throw new Error(data?.message || 'Your request was saved, but the email could not be sent. Please try again.')
   }
 
-  try {
-    const frameName = `w3f-${Date.now()}-${Math.random().toString(36).slice(2)}`
-    const frame = document.createElement('iframe')
-    frame.name = frameName
-    frame.setAttribute('aria-hidden', 'true')
-    frame.style.display = 'none'
-    document.body.appendChild(frame)
-
-    const form = document.createElement('form')
-    form.action = WEB3FORMS_ENDPOINT
-    form.method = 'POST'
-    form.target = frameName
-    form.style.display = 'none'
-
-    for (const [name, value] of Object.entries(fields)) {
-      const input = document.createElement('input')
-      input.type = 'hidden'
-      input.name = name
-      input.value = value
-      form.appendChild(input)
-    }
-
-    document.body.appendChild(form)
-    form.submit()
-
-    // Clean up once the response has loaded (or after a safety timeout).
-    const cleanup = () => {
-      form.remove()
-      frame.remove()
-    }
-    frame.addEventListener('load', () => window.setTimeout(cleanup, 500), { once: true })
-    window.setTimeout(cleanup, 15000)
-
-    return true
-  } catch {
-    return false
-  }
+  return true
 }
 

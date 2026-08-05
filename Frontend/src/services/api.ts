@@ -52,9 +52,9 @@ export async function sendMessage(payload: MessagePayload): Promise<{ id: string
     }),
   )
   const id = data.id as string
-  // Also email the team. Kept non-blocking: the submission is already stored.
+  // Confirm email delivery before showing the form's success state.
   const { notifyByEmail } = await import('./web3forms')
-  void notifyByEmail(payload, id)
+  await notifyByEmail(payload, id)
   return { id }
 }
 
