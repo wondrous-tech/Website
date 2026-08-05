@@ -19,6 +19,7 @@ export const navMenus: NavMenu[] = [
       { label: 'About us', href: '/about' },
       { label: 'Jobs', href: '/jobs' },
       { label: 'Blogs', href: '/blog' },
+      { label: 'Gallery', href: '/gallery' },
       { label: 'Testimonials', href: '/testimonials' },
       { label: 'Partner with us', href: '/partners' },
     ],

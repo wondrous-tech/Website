@@ -221,3 +221,14 @@ picture {
 @media (prefers-color-scheme: dark) {
   /* Placeholder for future dark mode implementation */
 }
+
+/* Indicator dots / small controls must keep their intrinsic size */
+@media (max-width: 768px) {
+  .hero__dot,
+  [class*="__dot"],
+  [class*="__dots"] > button {
+    min-height: 0;
+    min-width: 0;
+    padding: 0;
+  }
+}

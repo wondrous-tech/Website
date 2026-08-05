@@ -135,8 +135,9 @@ main#main-content {
   align-self: stretch;
   max-height: 48px;
   padding: 8px 64px;
-  border-bottom: 1px solid rgba(212, 179, 80, 0.18);
-  background: linear-gradient(90deg, #0a3520 0%, #0f4a2c 55%, #0a3520 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(90deg, #052b19 0%, #074a2b 52%, #052b19 100%);
+
   overflow: hidden;
   opacity: 1;
   transition:
@@ -179,7 +180,7 @@ main#main-content {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: rgba(244, 239, 228, 0.82);
+  color: rgba(255, 255, 255, 0.88);
   font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 12px;
   font-weight: 500;
@@ -199,8 +200,8 @@ main#main-content {
   align-items: center;
   border-radius: 999px;
   background: transparent;
-  border: 1px solid rgba(240, 212, 136, 0.55);
-  color: #f0d488;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: #ffffff;
   text-align: center;
   font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 12px;
@@ -216,9 +217,9 @@ main#main-content {
     border-color 0.2s ease;
 
   &:hover {
-    background: #f0d488;
-    border-color: #f0d488;
-    color: #0a3520;
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #052b19;
     transform: translateY(-1px);
   }
 
@@ -353,7 +354,9 @@ main#main-content {
 .main-navbar__logo {
   height: 64px;
   width: auto;
-  border-radius: 4px;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px -6px rgba(0, 0, 0, 0.45);
+
   object-fit: contain;
   transition:
     transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
@@ -1079,7 +1082,7 @@ main#main-content {
     border-radius: 0;
     align-self: stretch;
     background: var(--brand-emerald);
-    background-image: linear-gradient(90deg, #0a3520 0%, #0f4a2c 55%, #0a3520 100%);
+    background-image: linear-gradient(105deg, #0e8b4e 0%, #12a35b 45%, #109354 100%);
     border: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     backdrop-filter: none;
@@ -1099,8 +1102,8 @@ main#main-content {
     margin: 0;
     padding: 6px 40px;
     background: var(--brand-emerald);
-    background-image: linear-gradient(90deg, #0a3520 0%, #0f4a2c 55%, #0a3520 100%);
-    border-color: rgba(255, 255, 255, 0.14);
+    background-image: linear-gradient(90deg, #0d7a45 0%, #12a35b 50%, #0d7a45 100%);
+    border-color: rgba(255, 255, 255, 0.18);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     box-shadow: 0 14px 34px -26px rgba(0, 0, 0, 0.5);

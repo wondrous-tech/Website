@@ -24,6 +24,7 @@ const Editing = lazy(() => import('./pages/Editing').then((m) => ({ default: m.E
 const Contact = lazy(() => import('./pages/Contact').then((m) => ({ default: m.Contact })))
 const Faq = lazy(() => import('./pages/Faq').then((m) => ({ default: m.Faq })))
 const Marketplace = lazy(() => import('./pages/Marketplace').then((m) => ({ default: m.Marketplace })))
+const GalleryPage = lazy(() => import('./pages/GalleryPage').then((m) => ({ default: m.GalleryPage })))
 
 function App() {
   useScrollToHash()
@@ -50,6 +51,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/marketplace" element={<Marketplace />} />
+          <Route path="/gallery" element={<GalleryPage />} />
         </Routes>
       </Suspense>
       <ChatWidget />

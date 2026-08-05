@@ -318,7 +318,11 @@
 }
 
 @media (max-width: 900px) {
-  .hero__dots { margin-top: 20px; }
+  .hero__dots { margin-top: 20px; gap: 6px; }
+
+  .hero__dot { width: 16px; height: 3px; }
+
+  .hero__dot--active { width: 26px; }
 }
 
 .hero__dot {
