@@ -1,5 +1,7 @@
 import { useState, type FormEvent } from 'react'
+import { sendMessage } from '../../services/api'
 import './ScaleImpact.css'
+
 
 const partnershipTypes = ['Distributor', 'Bookstore', 'Educational Institution', 'CSR / Foundation']
 
@@ -50,6 +52,7 @@ const features = [
 
 const initialFormState = {
   name: '',
+  email: '',
   organization: '',
   type: partnershipTypes[0],
   message: '',
@@ -58,15 +61,35 @@ const initialFormState = {
 export function ScaleImpact() {
   const [form, setForm] = useState(initialFormState)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSending, setIsSending] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   function handleChange(field: keyof typeof initialFormState, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }))
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    setIsSubmitted(true)
+    if (isSending) return
+    setIsSending(true)
+    setError(null)
+    try {
+      await sendMessage({
+        source: 'partnership',
+        type: 'partnership',
+        name: form.name,
+        email: form.email,
+        message: form.message,
+        fields: { organization: form.organization, partnershipType: form.type },
+      })
+      setIsSubmitted(true)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+    } finally {
+      setIsSending(false)
+    }
   }
+
 
   return (
     <section className="scale-impact" id="partnership-inquiry">
@@ -148,6 +171,18 @@ export function ScaleImpact() {
               </div>
 
               <label className="scale-impact__field">
+                <span className="scale-impact__label">Email Address</span>
+                <input
+                  className="scale-impact__input"
+                  type="email"
+                  required
+                  placeholder="you@organisation.com"
+                  value={form.email}
+                  onChange={(event) => handleChange('email', event.target.value)}
+                />
+              </label>
+
+              <label className="scale-impact__field">
                 <span className="scale-impact__label">Partnership Type</span>
                 <select
                   className="scale-impact__input scale-impact__select"
@@ -173,9 +208,16 @@ export function ScaleImpact() {
                 />
               </label>
 
-              <button type="submit" className="scale-impact__submit-btn">
-                Submit Proposal
+              {error && (
+                <p className="scale-impact__error" role="alert">
+                  {error}
+                </p>
+              )}
+
+              <button type="submit" className="scale-impact__submit-btn" disabled={isSending}>
+                {isSending ? 'Sending…' : 'Submit Proposal'}
               </button>
+
             </form>
           )}
         </div>

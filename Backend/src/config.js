@@ -29,4 +29,8 @@ export const config = {
   groqModel: process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
 
   whatsappNumber: process.env.WHATSAPP_NUMBER || '+254 798 872 998',
+
+  // Public URL of THIS backend, used to build absolute upload links in emails.
+  publicUrl: (process.env.PUBLIC_URL || '').replace(/\/+$/, ''),
 }
+

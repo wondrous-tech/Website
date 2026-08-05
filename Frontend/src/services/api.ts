@@ -51,8 +51,13 @@ export async function sendMessage(payload: MessagePayload): Promise<{ id: string
       body: JSON.stringify(payload),
     }),
   )
-  return { id: data.id as string }
+  const id = data.id as string
+  // Also email the team. Kept non-blocking: the submission is already stored.
+  const { notifyByEmail } = await import('./web3forms')
+  void notifyByEmail(payload, id)
+  return { id }
 }
+
 
 export interface UploadedFile {
   name: string

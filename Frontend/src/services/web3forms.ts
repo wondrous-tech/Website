@@ -1,0 +1,64 @@
+// Emails submissions to the private Wondrous inbox through Web3Forms.
+// The access key only identifies the destination inbox — the address itself
+// is never exposed in the app. Web3Forms' free plan does not support
+// attachments, so uploads are stored by our own backend and the email
+// carries a download link instead.
+import { fileUrl } from './api'
+import type { MessagePayload } from './api'
+
+const WEB3FORMS_ACCESS_KEY = '2980ade2-1610-43a6-96ac-6f1810af26db'
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
+
+const label = (key: string) =>
+  key
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/[_-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/^./, (c) => c.toUpperCase())
+
+function absolute(path: string) {
+  if (!path) return ''
+  const resolved = fileUrl(path)
+  if (/^https?:\/\//i.test(resolved)) return resolved
+  return typeof window === 'undefined' ? resolved : `${window.location.origin}${resolved}`
+}
+
+/** Fire-and-forget: never blocks or fails the user's submission. */
+export async function notifyByEmail(payload: MessagePayload, reference?: string) {
+  const link = absolute(payload.fileUrl ?? '')
+
+  const body = [
+    payload.message?.trim() || '(no message provided)',
+    '',
+    '— Submission details —',
+    `Form: ${payload.source || 'contact'}`,
+    `Request type: ${payload.type || 'general'}`,
+    payload.phone ? `Phone: ${payload.phone}` : '',
+    payload.topic ? `Topic: ${payload.topic}` : '',
+    ...Object.entries(payload.fields ?? {}).map(([key, value]) =>
+      value ? `${label(key)}: ${value}` : '',
+    ),
+    link ? `\nUploaded document: ${link}` : '',
+    reference ? `\nReference: ${reference}` : '',
+  ]
+    .filter(Boolean)
+    .join('\n')
+
+  try {
+    // FormData avoids a CORS preflight (Web3Forms rejects OPTIONS requests).
+    const data = new FormData()
+    data.append('access_key', WEB3FORMS_ACCESS_KEY)
+    data.append('subject', `New ${payload.type || 'general'} request from ${payload.name}`)
+    data.append('from_name', 'Wondrous Publishing Website')
+    data.append('name', payload.name)
+    data.append('email', payload.email)
+    data.append('message', body)
+
+    const response = await fetch(WEB3FORMS_ENDPOINT, { method: 'POST', body: data })
+    const result = await response.json().catch(() => ({}))
+    return Boolean(response.ok && result?.success !== false)
+  } catch {
+    return false
+  }
+}

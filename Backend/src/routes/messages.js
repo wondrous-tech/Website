@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { addMessage, readMessages } from '../store.js'
 import { isEmail, str } from '../validate.js'
 
+
 export const messagesRouter = Router()
 
 messagesRouter.post('/', async (req, res) => {
@@ -25,6 +26,7 @@ messagesRouter.post('/', async (req, res) => {
       fields: typeof body.fields === 'object' && body.fields ? body.fields : {},
     })
     res.status(201).json({ ok: true, id: record.id })
+
   } catch (error) {
     console.error('[messages]', error)
     res.status(500).json({ error: 'Could not save your message. Please try again.' })
