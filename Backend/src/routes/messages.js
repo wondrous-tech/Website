@@ -1,6 +1,8 @@
 import { Router } from 'express'
 import { addMessage, readMessages } from '../store.js'
+import { sendSubmissionEmail } from '../mailer.js'
 import { isEmail, str } from '../validate.js'
+
 
 
 export const messagesRouter = Router()
@@ -25,8 +27,17 @@ messagesRouter.post('/', async (req, res) => {
       fileUrl: str(body.fileUrl, 300),
       fields: typeof body.fields === 'object' && body.fields ? body.fields : {},
     })
-    res.status(201).json({ ok: true, id: record.id })
 
+    try {
+      const mail = await sendSubmissionEmail(record)
+      return res.status(201).json({ ok: true, id: record.id, emailed: mail.sent })
+    } catch (mailError) {
+      console.error('[messages:mail]', mailError)
+      return res.status(502).json({
+        error: 'Your request was saved, but the email could not be sent. Please try again.',
+        id: record.id,
+      })
+    }
   } catch (error) {
     console.error('[messages]', error)
     res.status(500).json({ error: 'Could not save your message. Please try again.' })

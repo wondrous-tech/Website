@@ -44,6 +44,9 @@ export interface MessagePayload {
 }
 
 export async function sendMessage(payload: MessagePayload): Promise<{ id: string }> {
+  // The backend stores the submission and emails it (with attachment) via
+  // Nodemailer. The Web3Forms client-side path in ./web3forms.ts is kept
+  // around as a spare route but is no longer called.
   const data = await parse(
     await fetch(url('/api/messages'), {
       method: 'POST',
@@ -51,11 +54,7 @@ export async function sendMessage(payload: MessagePayload): Promise<{ id: string
       body: JSON.stringify(payload),
     }),
   )
-  const id = data.id as string
-  // Confirm email delivery before showing the form's success state.
-  const { notifyByEmail } = await import('./web3forms')
-  await notifyByEmail(payload, id)
-  return { id }
+  return { id: data.id as string }
 }
 
 

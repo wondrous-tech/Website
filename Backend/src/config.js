@@ -32,5 +32,22 @@ export const config = {
 
   // Public URL of THIS backend, used to build absolute upload links in emails.
   publicUrl: (process.env.PUBLIC_URL || '').replace(/\/+$/, ''),
+
+  // SMTP transport for Nodemailer (Gmail: smtp.gmail.com:465, app password).
+  smtp: {
+    host: process.env.SMTP_HOST || '',
+    port: int(process.env.SMTP_PORT, 465),
+    secure: (process.env.SMTP_SECURE || 'true') !== 'false',
+    user: process.env.SMTP_USER || '',
+    pass: process.env.SMTP_PASS || '',
+  },
+
+  mail: {
+    // Destination inbox — never exposed to the browser.
+    to: process.env.MAIL_TO || 'wondrouspublishing@gmail.com',
+    from:
+      process.env.MAIL_FROM ||
+      `Wondrous Publishing Website <${process.env.SMTP_USER || 'wondrouspublishing@gmail.com'}>`,
+  },
 }
 
