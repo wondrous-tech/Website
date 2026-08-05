@@ -63,6 +63,20 @@ export async function notifyByEmail(payload: MessagePayload, reference?: string)
     message: body,
   }
 
+  // Preferred path: real POST from the browser. Works on any hosted domain
+  // (Railway included) and never turns into a GET.
+  try {
+    const response = await fetch(WEB3FORMS_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(fields),
+    })
+    const data = await response.json().catch(() => ({}))
+    if (response.ok && data?.success !== false) return true
+  } catch {
+    // fall through to the hidden-iframe fallback below
+  }
+
   try {
     const frameName = `w3f-${Date.now()}-${Math.random().toString(36).slice(2)}`
     const frame = document.createElement('iframe')
