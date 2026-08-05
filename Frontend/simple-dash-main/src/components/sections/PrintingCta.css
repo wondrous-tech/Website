@@ -1,0 +1,129 @@
+.printing-cta {
+  position: relative;
+  display: flex;
+  max-width: 1152px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 80px 192px;
+  flex-direction: column;
+  align-items: center;
+  background: #0b3d2e;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    padding: 64px 80px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 48px 24px;
+  }
+}
+
+.printing-cta__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    157.38% 52.73% at 50% 50%,
+    rgba(20, 77, 55, 0.3) 0%,
+    rgba(20, 77, 55, 0) 50%,
+    rgba(20, 77, 55, 0) 100%
+  );
+}
+
+.printing-cta__watermark {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  opacity: 0.06;
+  pointer-events: none;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.printing-cta__container {
+  position: relative;
+  display: flex;
+  max-width: 768px;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.printing-cta__heading {
+  margin: 0;
+  color: #fff;
+  text-align: center;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: clamp(32px, 4.4vw, 48px);
+  font-weight: 600;
+  line-height: 1.17;
+  letter-spacing: -0.96px;
+}
+
+.printing-cta__actions {
+  display: flex;
+  padding-top: 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.printing-cta__cta {
+  display: flex;
+  padding: 20.5px 40px 21.5px;
+  align-items: center;
+  background: var(--brand-emerald);
+  color: #ffffff;
+  text-align: center;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration: none;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.printing-cta__cta:hover {
+  background: var(--brand-emerald-bright);
+  transform: translateY(-1px);
+}
+
+.printing-cta__cta:focus-visible {
+  outline: 2px solid var(--brand-emerald-bright);
+  outline-offset: 3px;
+}
+
+.printing-cta__cta-outline {
+  display: flex;
+  padding: 20px 40px;
+  align-items: center;
+  border: 1px solid #79a894;
+  color: #79a894;
+  text-align: center;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.printing-cta__cta-outline:hover {
+  background: rgba(121, 168, 148, 0.1);
+  transform: translateY(-1px);
+}
+
+.printing-cta__cta-outline:focus-visible {
+  outline: 2px solid var(--brand-emerald-bright);
+  outline-offset: 3px;
+}

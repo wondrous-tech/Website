@@ -1,0 +1,230 @@
+.finishing-finalities {
+  display: flex;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 96px 64px;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  background: #faf9f5;
+
+  @media (max-width: 1024px) {
+    padding: 64px 40px;
+    gap: 48px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 48px 20px;
+  }
+}
+
+.finishing-finalities__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.finishing-finalities__heading {
+  margin: 0;
+  color: #12a45c;
+  text-align: center;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 600;
+  line-height: 1.17;
+  letter-spacing: -0.96px;
+}
+
+.finishing-finalities__underline {
+  width: 64px;
+  height: 4px;
+  background: #0f5a3b;
+}
+
+.finishing-finalities__subtext {
+  margin: 0;
+  max-width: 576px;
+  color: #414944;
+  text-align: center;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.finishing-finalities__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 24px;
+  align-self: stretch;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.finishing-finalities__card {
+  position: relative;
+  display: flex;
+  border: 1px solid #c0c8c3;
+  background: #f4f4f0;
+  overflow: hidden;
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.25s ease;
+}
+
+.finishing-finalities__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent;
+  box-shadow: inset 0 0 0 0 #ffffff;
+  pointer-events: none;
+  transition: box-shadow 0.35s ease;
+}
+
+.finishing-finalities__card:hover {
+  border-color: #0f5a3b;
+  box-shadow: 0 20px 40px -24px rgba(20, 77, 55, 0.35);
+  transform: translateY(-4px);
+}
+
+.finishing-finalities__card:hover::after {
+  box-shadow: inset 0 3px 0 0 #0f5a3b;
+}
+
+.finishing-finalities__card--lamination,
+.finishing-finalities__card--packaging {
+  grid-column: span 8;
+
+  @media (max-width: 900px) {
+    grid-column: span 1;
+  }
+}
+
+.finishing-finalities__card--binding,
+.finishing-finalities__card--cutting {
+  grid-column: span 4;
+  flex-direction: column;
+
+  @media (max-width: 900px) {
+    grid-column: span 1;
+  }
+}
+
+.finishing-finalities__card--packaging {
+  flex-direction: row-reverse;
+
+  @media (max-width: 640px) {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 640px) {
+  .finishing-finalities__card--lamination {
+    flex-direction: column;
+  }
+}
+
+.finishing-finalities__card-text {
+  display: flex;
+  flex: 1 1 0;
+  padding: 40px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+}
+
+.finishing-finalities__card-image {
+  display: flex;
+  flex: 1 1 0;
+  min-height: 240px;
+  overflow: hidden;
+}
+
+.finishing-finalities__card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.finishing-finalities__card:hover .finishing-finalities__card-image img {
+  transform: scale(1.06);
+}
+
+.finishing-finalities__card--binding .finishing-finalities__card-image,
+.finishing-finalities__card--cutting .finishing-finalities__card-image {
+  height: 192px;
+  min-height: 192px;
+}
+
+.finishing-finalities__card--binding .finishing-finalities__card-text,
+.finishing-finalities__card--cutting .finishing-finalities__card-text {
+  gap: 8px;
+}
+
+.finishing-finalities__eyebrow {
+  color: #0f5a3b;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.finishing-finalities__card-title {
+  margin: 0;
+  color: #12a45c;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40px;
+}
+
+.finishing-finalities__card-description {
+  margin: 0;
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.finishing-finalities__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0f5a3b;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+  text-decoration: none;
+}
+
+.finishing-finalities__link:hover {
+  text-decoration: underline;
+}
+
+.finishing-finalities__link:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.finishing-finalities__link svg {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.finishing-finalities__link:hover svg {
+  transform: translateX(3px);
+}

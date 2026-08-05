@@ -1,0 +1,13 @@
+.blog-page {
+  display: flex;
+  align-items: flex-start;
+  background: #faf9f5;
+}
+
+.blog-page__content {
+  display: flex;
+  min-width: 0;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: stretch;
+}

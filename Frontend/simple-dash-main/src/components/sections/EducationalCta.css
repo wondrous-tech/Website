@@ -1,0 +1,153 @@
+.educational-cta {
+  position: relative;
+  display: flex;
+  padding: 96px 64px;
+  flex-direction: column;
+  align-items: center;
+  background: #0b3d2e;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    padding: 64px 40px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 48px 24px;
+  }
+}
+
+.educational-cta__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    157.38% 52.73% at 50% 50%,
+    rgba(20, 77, 55, 0.3) 0%,
+    rgba(20, 77, 55, 0) 50%,
+    rgba(20, 77, 55, 0) 100%
+  );
+}
+
+.educational-cta__watermark {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  opacity: 0.06;
+  pointer-events: none;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.educational-cta__container {
+  position: relative;
+  display: flex;
+  max-width: 672px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.educational-cta__eyebrow {
+  display: inline-flex;
+  padding: 4px 12px;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  color: var(--brand-emerald-bright);
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.educational-cta__heading {
+  margin: 0;
+  color: #fff;
+  text-align: center;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: clamp(32px, 4.4vw, 48px);
+  font-weight: 600;
+  line-height: 1.17;
+  letter-spacing: -0.96px;
+}
+
+.educational-cta__subtext {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.educational-cta__actions {
+  display: flex;
+  padding-top: 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.educational-cta__cta {
+  display: flex;
+  padding: 20.5px 48px 21.5px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 12px;
+  background: var(--brand-emerald);
+  color: #ffffff;
+  text-align: center;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.educational-cta__cta:hover {
+  background: var(--brand-emerald-bright);
+  transform: translateY(-1px);
+}
+
+.educational-cta__cta:focus-visible {
+  outline: 2px solid var(--brand-emerald-bright);
+  outline-offset: 3px;
+}
+
+.educational-cta__cta-outline {
+  display: flex;
+  padding: 20px 48px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 12px;
+  border: 1px solid #fff;
+  color: #fff;
+  text-align: center;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.educational-cta__cta-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.educational-cta__cta-outline:focus-visible {
+  outline: 2px solid var(--brand-emerald-bright);
+  outline-offset: 3px;
+}

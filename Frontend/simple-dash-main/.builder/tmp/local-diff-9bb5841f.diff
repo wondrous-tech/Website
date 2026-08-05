@@ -1,0 +1,1019 @@
+diff --git a/wonderous/src/utils/navMenus.ts b/wonderous/src/utils/navMenus.ts
+index 2fbeeeb..c14af69 100644
+--- a/wonderous/src/utils/navMenus.ts
++++ b/wonderous/src/utils/navMenus.ts
+@@ -1,7 +1,12 @@
+[L:1] +export interface NavMenuItem {
+[L:2] +  label: string
+[L:3] +  href?: string
+[L:4] +}
+[L:5] +
+[L:6/1]  export interface NavMenu {
+[L:7/2]    label: string
+[L:8/3]    heading: string
+[L:4] -  items: string[]
+[L:9] +  items: NavMenuItem[]
+[L:10/5]    active?: boolean
+[L:11/6]  }
+[L:12/7]  
+@@ -10,34 +15,40 @@ export const navMenus: NavMenu[] = [
+[L:15/10]      label: 'Explore',
+[L:16/11]      heading: 'Explore Wondrous',
+[L:17/12]      active: true,
+[L:13] -    items: ['About us', 'Jobs', 'Blogs', 'Testimonials', 'Partner with us'],
+[L:18] +    items: [
+[L:19] +      { label: 'About us', href: '/about' },
+[L:20] +      { label: 'Jobs' },
+[L:21] +      { label: 'Blogs' },
+[L:22] +      { label: 'Testimonials' },
+[L:23] +      { label: 'Partner with us' },
+[L:24] +    ],
+[L:25/14]    },
+[L:26/15]    {
+[L:27/16]      label: 'Solutions',
+[L:28/17]      heading: 'Our Solutions',
+[L:29/18]      items: [
+[L:19] -      'Self-publishing',
+[L:20] -      'Printing',
+[L:21] -      'Branding',
+[L:22] -      'Finishing services',
+[L:23] -      'Educational publishing',
+[L:30] +      { label: 'Self-publishing' },
+[L:31] +      { label: 'Printing' },
+[L:32] +      { label: 'Branding' },
+[L:33] +      { label: 'Finishing services' },
+[L:34] +      { label: 'Educational publishing' },
+[L:35/24]      ],
+[L:36/25]    },
+[L:37/26]    {
+[L:38/27]      label: 'Editing',
+[L:39/28]      heading: 'Editing Packages',
+[L:40/29]      items: [
+[L:30] -      'Manuscript evaluation',
+[L:31] -      'Light editing',
+[L:32] -      'Medium editing',
+[L:33] -      'Heavy editing',
+[L:34] -      'Ghostwriting',
+[L:35] -      'Writing academy',
+[L:41] +      { label: 'Manuscript evaluation' },
+[L:42] +      { label: 'Light editing' },
+[L:43] +      { label: 'Medium editing' },
+[L:44] +      { label: 'Heavy editing' },
+[L:45] +      { label: 'Ghostwriting' },
+[L:46] +      { label: 'Writing academy' },
+[L:47/36]      ],
+[L:48/37]    },
+[L:49/38]    {
+[L:50/39]      label: 'Buy/Sell',
+[L:51/40]      heading: 'Buy/Sell',
+[L:41] -    items: ['Hardcopies', 'eBooks/Audiobooks'],
+[L:52] +    items: [{ label: 'Hardcopies' }, { label: 'eBooks/Audiobooks' }],
+[L:53/42]    },
+[L:54/43]  ]
+[L:55/44] 
+diff --git a/wonderous/src/App.tsx b/wonderous/src/App.tsx
+index 86fb720..8f9bfc2 100644
+--- a/wonderous/src/App.tsx
++++ b/wonderous/src/App.tsx
+@@ -1,7 +1,14 @@
+[L:1] +import { Route, Routes } from 'react-router-dom'
+[L:2/1]  import { Home } from './pages/Home'
+[L:3] +import { AboutUs } from './pages/AboutUs'
+[L:4/2]  
+[L:5/3]  function App() {
+[L:4] -  return <Home />
+[L:6] +  return (
+[L:7] +    <Routes>
+[L:8] +      <Route path="/" element={<Home />} />
+[L:9] +      <Route path="/about" element={<AboutUs />} />
+[L:10] +    </Routes>
+[L:11] +  )
+[L:12/5]  }
+[L:13/6]  
+[L:14/7]  export default App
+diff --git a/wonderous/src/components/sections/CoreValues.tsx b/wonderous/src/components/sections/CoreValues.tsx
+new file mode 100644
+index 0000000..bc5caa9
+--- /dev/null
++++ b/wonderous/src/components/sections/CoreValues.tsx
+@@ -0,0 +1,94 @@
+[L:1] +import './CoreValues.css'
+[L:2] +
+[L:3] +const coreValues = [
+[L:4] +  {
+[L:5] +    label: 'Innovation',
+[L:6] +    icon: (
+[L:7] +      <path d="M11.25 30C10.425 30 9.71875 29.7062 9.13125 29.1187C8.54375 28.5312 8.25 27.825 8.25 27H14.25C14.25 27.825 13.9562 28.5312 13.3687 29.1187C12.7812 29.7062 12.075 30 11.25 30V30M5.25 25.5V22.5H17.25V25.5H5.25V25.5M5.625 21C3.9 19.975 2.53125 18.6 1.51875 16.875C0.50625 15.15 0 13.275 0 11.25C0 8.125 1.09375 5.46875 3.28125 3.28125C5.46875 1.09375 8.125 0 11.25 0C14.375 0 17.0312 1.09375 19.2188 3.28125C21.4062 5.46875 22.5 8.125 22.5 11.25C22.5 13.275 21.9938 15.15 20.9813 16.875C19.9688 18.6 18.6 19.975 16.875 21H5.625V21M6.525 18H15.975C17.1 17.2 17.9687 16.2125 18.5812 15.0375C19.1937 13.8625 19.5 12.6 19.5 11.25C19.5 8.95 18.7 7 17.1 5.4C15.5 3.8 13.55 3 11.25 3C8.95 3 7 3.8 5.4 5.4C3.8 7 3 8.95 3 11.25C3 12.6 3.30625 13.8625 3.91875 15.0375C4.53125 16.2125 5.4 17.2 6.525 18V18M11.25 18V18V18V18V18V18V18V18V18V18V18" />
+[L:8] +    ),
+[L:9] +    viewBox: '0 0 23 30',
+[L:10] +    width: 23,
+[L:11] +    height: 30,
+[L:12] +  },
+[L:13] +  {
+[L:14] +    label: 'Spirituality',
+[L:15] +    icon: (
+[L:16] +      <path d="M27 12L25.125 7.875L21 6L25.125 4.125L27 0L28.875 4.125L33 6L28.875 7.875L27 12V12M27 33L25.125 28.875L21 27L25.125 25.125L27 21L28.875 25.125L33 27L28.875 28.875L27 33V33M12 28.5L8.25 20.25L0 16.5L8.25 12.75L12 4.5L15.75 12.75L24 16.5L15.75 20.25L12 28.5V28.5M12 21.225L13.5 18L16.725 16.5L13.5 15L12 11.775L10.5 15L7.275 16.5L10.5 18L12 21.225V21.225M12 16.5V16.5V16.5V16.5V16.5V16.5V16.5V16.5V16.5V16.5" />
+[L:17] +    ),
+[L:18] +    viewBox: '0 0 33 33',
+[L:19] +    width: 33,
+[L:20] +    height: 33,
+[L:21] +  },
+[L:22] +  {
+[L:23] +    label: 'Empowerment',
+[L:24] +    icon: (
+[L:25] +      <path d="M9.825 24.3L17.5875 15H11.5875L12.675 6.4875L5.7375 16.5H10.95L9.825 24.3V24.3M6 30L7.5 19.5H0L13.5 0H16.5L15 12H24L9 30H6V30M11.6625 15.375V15.375V15.375V15.375V15.375V15.375V15.375V15.375" />
+[L:26] +    ),
+[L:27] +    viewBox: '0 0 24 30',
+[L:28] +    width: 24,
+[L:29] +    height: 30,
+[L:30] +  },
+[L:31] +  {
+[L:32] +    label: 'Excellence',
+[L:33] +    icon: (
+[L:34] +      <path d="M0 0H15V11.775C15 12.35 14.875 12.8625 14.625 13.3125C14.375 13.7625 14.025 14.125 13.575 14.4L8.25 17.55L9.3 21H15L10.35 24.3L12.15 30L7.5 26.475L2.85 30L4.65 24.3L0 21H5.7L6.75 17.55L1.425 14.4C0.975 14.125 0.625 13.7625 0.375 13.3125C0.125 12.8625 0 12.35 0 11.775V0V0M3 3V11.775V11.775V11.775L6 13.575V3H3V3M12 3H9V13.575L12 11.775V11.775V11.775V3V3M7.5 8.7375V8.7375V8.7375V8.7375V8.7375V8.7375V8.7375M6 8.2875V8.2875V8.2875V8.2875V8.2875V8.2875V8.2875V8.2875M9 8.2875V8.2875V8.2875V8.2875V8.2875V8.2875V8.2875V8.2875" />
+[L:35] +    ),
+[L:36] +    viewBox: '0 0 15 30',
+[L:37] +    width: 15,
+[L:38] +    height: 30,
+[L:39] +  },
+[L:40] +  {
+[L:41] +    label: 'Integrity',
+[L:42] +    icon: (
+[L:43] +      <path d="M10.425 20.325L18.9 11.85L16.7625 9.7125L10.425 16.05L7.275 12.9L5.1375 15.0375L10.425 20.325V20.325M12 30C8.525 29.125 5.65625 27.1312 3.39375 24.0187C1.13125 20.9062 0 17.45 0 13.65V4.5L12 0L24 4.5V13.65C24 17.45 22.8688 20.9062 20.6063 24.0187C18.3438 27.1312 15.475 29.125 12 30V30M12 26.85C14.6 26.025 16.75 24.375 18.45 21.9C20.15 19.425 21 16.675 21 13.65V6.5625L12 3.1875L3 6.5625V13.65C3 16.675 3.85 19.425 5.55 21.9C7.25 24.375 9.4 26.025 12 26.85V26.85M12 15V15V15V15V15V15V15V15V15V15" />
+[L:44] +    ),
+[L:45] +    viewBox: '0 0 24 30',
+[L:46] +    width: 24,
+[L:47] +    height: 30,
+[L:48] +  },
+[L:49] +]
+[L:50] +
+[L:51] +export function CoreValues() {
+[L:52] +  return (
+[L:53] +    <section className="core-values">
+[L:54] +      <div className="core-values__container">
+[L:55] +        <div className="core-values__heading-block">
+[L:56] +          <h2 className="core-values__heading">Core Values</h2>
+[L:57] +          <div className="core-values__underline" aria-hidden="true" />
+[L:58] +        </div>
+[L:59] +
+[L:60] +        <div className="core-values__grid">
+[L:61] +          {coreValues.map((value) => (
+[L:62] +            <div className="core-values__card" key={value.label}>
+[L:63] +              <svg
+[L:64] +                width={value.width}
+[L:65] +                height={value.height}
+[L:66] +                viewBox={value.viewBox}
+[L:67] +                fill="#00261B"
+[L:68] +                xmlns="http://www.w3.org/2000/svg"
+[L:69] +                aria-hidden="true"
+[L:70] +              >
+[L:71] +                {value.icon}
+[L:72] +              </svg>
+[L:73] +              <h3 className="core-values__card-label">{value.label}</h3>
+[L:74] +            </div>
+[L:75] +          ))}
+[L:76] +        </div>
+[L:77] +
+[L:78] +        <div className="core-values__highlights">
+[L:79] +          <div className="core-values__highlight core-values__highlight--dark">
+[L:80] +            <h3 className="core-values__highlight-title">Katalambano</h3>
+[L:81] +            <p className="core-values__highlight-text">
+[L:82] +              "We keep pressing forward until purpose is fulfilled and vision becomes reality."
+[L:83] +            </p>
+[L:84] +          </div>
+[L:85] +
+[L:86] +          <div className="core-values__highlight core-values__highlight--light">
+[L:87] +            <h3 className="core-values__highlight-title">Arithmeo</h3>
+[L:88] +            <p className="core-values__highlight-text">"We are obsessed with numbers."</p>
+[L:89] +          </div>
+[L:90] +        </div>
+[L:91] +      </div>
+[L:92] +    </section>
+[L:93] +  )
+[L:94] +}
+diff --git a/wonderous/src/components/sections/CoreValues.css b/wonderous/src/components/sections/CoreValues.css
+new file mode 100644
+index 0000000..97b354e
+--- /dev/null
++++ b/wonderous/src/components/sections/CoreValues.css
+@@ -0,0 +1,159 @@
+[L:1] +.core-values {
+[L:2] +  display: flex;
+[L:3] +  padding: 96px 64px;
+[L:4] +  flex-direction: column;
+[L:5] +  align-items: flex-start;
+[L:6] +  background: #faf9f5;
+[L:7] +
+[L:8] +  @media (max-width: 1024px) {
+[L:9] +    padding: 72px 24px;
+[L:10] +  }
+[L:11] +
+[L:12] +  @media (max-width: 640px) {
+[L:13] +    padding: 56px 16px;
+[L:14] +  }
+[L:15] +}
+[L:16] +
+[L:17] +.core-values__container {
+[L:18] +  display: flex;
+[L:19] +  max-width: 1280px;
+[L:20] +  width: 100%;
+[L:21] +  margin: 0 auto;
+[L:22] +  flex-direction: column;
+[L:23] +  align-items: flex-start;
+[L:24] +  gap: 64px;
+[L:25] +}
+[L:26] +
+[L:27] +.core-values__heading-block {
+[L:28] +  display: flex;
+[L:29] +  flex-direction: column;
+[L:30] +  align-items: center;
+[L:31] +  gap: 16px;
+[L:32] +  align-self: stretch;
+[L:33] +}
+[L:34] +
+[L:35] +.core-values__heading {
+[L:36] +  margin: 0;
+[L:37] +  color: var(--header-bg);
+[L:38] +  text-align: center;
+[L:39] +  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+[L:40] +  font-size: 48px;
+[L:41] +  font-weight: 600;
+[L:42] +  line-height: 56px;
+[L:43] +  letter-spacing: -0.96px;
+[L:44] +
+[L:45] +  @media (max-width: 640px) {
+[L:46] +    font-size: 36px;
+[L:47] +    line-height: 44px;
+[L:48] +  }
+[L:49] +}
+[L:50] +
+[L:51] +.core-values__underline {
+[L:52] +  width: 96px;
+[L:53] +  height: 4px;
+[L:54] +  background: var(--accent-yellow-text);
+[L:55] +}
+[L:56] +
+[L:57] +.core-values__grid {
+[L:58] +  display: flex;
+[L:59] +  justify-content: center;
+[L:60] +  align-items: flex-start;
+[L:61] +  flex-wrap: wrap;
+[L:62] +  gap: 24px;
+[L:63] +  align-self: stretch;
+[L:64] +}
+[L:65] +
+[L:66] +.core-values__card {
+[L:67] +  display: flex;
+[L:68] +  width: 211px;
+[L:69] +  padding: 32px 32px 40px;
+[L:70] +  flex-direction: column;
+[L:71] +  justify-content: center;
+[L:72] +  align-items: center;
+[L:73] +  gap: 16px;
+[L:74] +  border-radius: 8px;
+[L:75] +  border: 1px solid #c0c8c3;
+[L:76] +
+[L:77] +  @media (max-width: 640px) {
+[L:78] +    width: 100%;
+[L:79] +    max-width: 280px;
+[L:80] +  }
+[L:81] +}
+[L:82] +
+[L:83] +.core-values__card-label {
+[L:84] +  align-self: stretch;
+[L:85] +  margin: 0;
+[L:86] +  color: var(--header-bg);
+[L:87] +  text-align: center;
+[L:88] +  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+[L:89] +  font-size: 24px;
+[L:90] +  font-weight: 500;
+[L:91] +  line-height: 32px;
+[L:92] +}
+[L:93] +
+[L:94] +.core-values__highlights {
+[L:95] +  display: flex;
+[L:96] +  justify-content: center;
+[L:97] +  align-items: stretch;
+[L:98] +  gap: 32px;
+[L:99] +  align-self: stretch;
+[L:100] +
+[L:101] +  @media (max-width: 768px) {
+[L:102] +    flex-direction: column;
+[L:103] +  }
+[L:104] +}
+[L:105] +
+[L:106] +.core-values__highlight {
+[L:107] +  display: flex;
+[L:108] +  flex: 1 0 0;
+[L:109] +  padding: 40px;
+[L:110] +  flex-direction: column;
+[L:111] +  justify-content: center;
+[L:112] +  align-items: flex-start;
+[L:113] +  gap: 16px;
+[L:114] +  border-radius: 16px;
+[L:115] +}
+[L:116] +
+[L:117] +.core-values__highlight--dark {
+[L:118] +  background: #0b3d2e;
+[L:119] +}
+[L:120] +
+[L:121] +.core-values__highlight--light {
+[L:122] +  padding: 54px 40px;
+[L:123] +  background: var(--accent-yellow);
+[L:124] +}
+[L:125] +
+[L:126] +.core-values__highlight-title {
+[L:127] +  align-self: stretch;
+[L:128] +  margin: 0;
+[L:129] +  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+[L:130] +  font-size: 32px;
+[L:131] +  font-weight: 500;
+[L:132] +  line-height: 40px;
+[L:133] +}
+[L:134] +
+[L:135] +.core-values__highlight--dark .core-values__highlight-title {
+[L:136] +  color: #bcedd7;
+[L:137] +}
+[L:138] +
+[L:139] +.core-values__highlight--light .core-values__highlight-title {
+[L:140] +  color: #241a00;
+[L:141] +}
+[L:142] +
+[L:143] +.core-values__highlight-text {
+[L:144] +  align-self: stretch;
+[L:145] +  margin: 0;
+[L:146] +  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+[L:147] +  font-size: 18px;
+[L:148] +  font-style: italic;
+[L:149] +  font-weight: 400;
+[L:150] +  line-height: 155.556%;
+[L:151] +}
+[L:152] +
+[L:153] +.core-values__highlight--dark .core-values__highlight-text {
+[L:154] +  color: #79a894;
+[L:155] +}
+[L:156] +
+[L:157] +.core-values__highlight--light .core-values__highlight-text {
+[L:158] +  color: var(--accent-yellow-text);
+[L:159] +}
+diff --git a/wonderous/src/components/layout/Header.tsx b/wonderous/src/components/layout/Header.tsx
+index adbe0b9..68c97ad 100644
+--- a/wonderous/src/components/layout/Header.tsx
++++ b/wonderous/src/components/layout/Header.tsx
+@@ -1,3 +1,4 @@
+[L:1] +import { Link } from 'react-router-dom'
+[L:2/1]  import logo from '../../assets/logo.jpeg'
+[L:3/2]  import { useMobileMenu } from '../../hooks/useMobileMenu'
+[L:4/3]  import { useScrollHidden } from '../../hooks/useScrollHidden'
+@@ -63,13 +64,13 @@ export function Header() {
+[L:64/63]  
+[L:65/64]        <nav className="main-navbar">
+[L:66/65]          <div className="main-navbar__container">
+[L:66] -          <a className="main-navbar__brand" href="#">
+[L:67] +          <Link className="main-navbar__brand" to="/">
+[L:68/67]              <img className="main-navbar__logo" src={logo} alt="Wondrous Publishing" />
+[L:69/68]              Wondrous Publishing
+[L:69] -          </a>
+[L:70] +          </Link>
+[L:71/70]  
+[L:72/71]            <div className="main-navbar__links">
+[L:72] -            <a className="main-navbar__home cursor-target" href="#" aria-label="Home">
+[L:73] +            <Link className="main-navbar__home cursor-target" to="/" aria-label="Home">
+[L:74/73]                <svg
+[L:75/74]                  width="18"
+[L:76/75]                  height="18"
+@@ -84,7 +85,7 @@ export function Header() {
+[L:85/84]                    strokeLinejoin="round"
+[L:86/85]                  />
+[L:87/86]                </svg>
+[L:87] -            </a>
+[L:88] +            </Link>
+[L:89/88]              <span className="main-navbar__divider" aria-hidden="true" />
+[L:90/89]              {navMenus.map((menu) => (
+[L:91/90]                <NavDropdown
+diff --git a/wonderous/src/components/sections/AboutHero.css b/wonderous/src/components/sections/AboutHero.css
+new file mode 100644
+index 0000000..77cd6e3
+--- /dev/null
++++ b/wonderous/src/components/sections/AboutHero.css
+@@ -0,0 +1,117 @@
+[L:1] +.about-hero {
+[L:2] +  position: relative;
+[L:3] +  display: flex;
+[L:4] +  min-height: clamp(600px, 90vh, 900px);
+[L:5] +  justify-content: center;
+[L:6] +  align-items: center;
+[L:7] +  padding: 96px 20px;
+[L:8] +  overflow: hidden;
+[L:9] +  background: url('https://api.builder.io/api/v1/image/assets/TEMP/8e94469c4441f153394936d992d9d4e6b1233c5b?width=2560')
+[L:10] +    center / cover no-repeat;
+[L:11] +
+[L:12] +  @media (max-width: 1024px) {
+[L:13] +    min-height: clamp(520px, 80vh, 760px);
+[L:14] +    padding: 72px 20px;
+[L:15] +  }
+[L:16] +
+[L:17] +  @media (max-width: 640px) {
+[L:18] +    padding: 56px 16px;
+[L:19] +  }
+[L:20] +}
+[L:21] +
+[L:22] +.about-hero__scrim {
+[L:23] +  position: absolute;
+[L:24] +  inset: 0;
+[L:25] +  background: rgba(0, 38, 27, 0.4);
+[L:26] +  mix-blend-mode: multiply;
+[L:27] +}
+[L:28] +
+[L:29] +.about-hero__gradient {
+[L:30] +  position: absolute;
+[L:31] +  inset: 0;
+[L:32] +  background: radial-gradient(
+[L:33] +    59.44% 92.46% at 50% 50%,
+[L:34] +    rgba(0, 38, 27, 0) 20%,
+[L:35] +    rgba(0, 38, 27, 0.7) 100%
+[L:36] +  );
+[L:37] +}
+[L:38] +
+[L:39] +.about-hero__container {
+[L:40] +  position: relative;
+[L:41] +  z-index: 1;
+[L:42] +  display: flex;
+[L:43] +  max-width: 1024px;
+[L:44] +  flex-direction: column;
+[L:45] +  align-items: center;
+[L:46] +  gap: 24px;
+[L:47] +}
+[L:48] +
+[L:49] +.about-hero__eyebrow {
+[L:50] +  color: var(--accent-yellow-light);
+[L:51] +  text-align: center;
+[L:52] +  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+[L:53] +  font-size: 14px;
+[L:54] +  font-weight: 600;
+[L:55] +  line-height: 20px;
+[L:56] +  letter-spacing: 5.6px;
+[L:57] +  text-transform: uppercase;
+[L:58] +}
+[L:59] +
+[L:60] +.about-hero__heading {
+[L:61] +  margin: 0;
+[L:62] +  color: #fff;
+[L:63] +  text-align: center;
+[L:64] +  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+[L:65] +  font-size: clamp(40px, 6vw, 84px);
+[L:66] +  font-weight: 400;
+[L:67] +  line-height: 1.1;
+[L:68] +
+[L:69] +  @media (max-width: 640px) {
+[L:70] +    line-height: 1.15;
+[L:71] +  }
+[L:72] +}
+[L:73] +
+[L:74] +.about-hero__quote-panel {
+[L:75] +  display: flex;
+[L:76] +  max-width: 768px;
+[L:77] +  padding: 48px 40px 40px;
+[L:78] +  justify-content: center;
+[L:79] +  align-items: flex-start;
+[L:80] +  border-radius: 8px;
+[L:81] +  border: 1px solid rgba(255, 255, 255, 0.1);
+[L:82] +  background: rgba(255, 255, 255, 0.05);
+[L:83] +  backdrop-filter: blur(6px);
+[L:84] +
+[L:85] +  @media (max-width: 640px) {
+[L:86] +    padding: 32px 24px;
+[L:87] +  }
+[L:88] +}
+[L:89] +
+[L:90] +.about-hero__quote {
+[L:91] +  margin: 0;
+[L:92] +  padding: 0 64px;
+[L:93] +  color: #fff;
+[L:94] +  text-align: center;
+[L:95] +  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+[L:96] +  font-size: 24px;
+[L:97] +  font-style: italic;
+[L:98] +  font-weight: 500;
+[L:99] +  line-height: 162.5%;
+[L:100] +
+[L:101] +  @media (max-width: 640px) {
+[L:102] +    padding: 0;
+[L:103] +    font-size: 20px;
+[L:104] +  }
+[L:105] +}
+[L:106] +
+[L:107] +.about-hero__scroll-cue {
+[L:108] +  position: absolute;
+[L:109] +  z-index: 1;
+[L:110] +  left: 50%;
+[L:111] +  bottom: 40px;
+[L:112] +  transform: translateX(-50%);
+[L:113] +
+[L:114] +  @media (max-width: 640px) {
+[L:115] +    display: none;
+[L:116] +  }
+[L:117] +}
+diff --git a/wonderous/src/components/sections/OurNarrative.tsx b/wonderous/src/components/sections/OurNarrative.tsx
+new file mode 100644
+index 0000000..6507b71
+--- /dev/null
++++ b/wonderous/src/components/sections/OurNarrative.tsx
+@@ -0,0 +1,58 @@
+[L:1] +import './OurNarrative.css'
+[L:2] +
+[L:3] +export function OurNarrative() {
+[L:4] +  return (
+[L:5] +    <section className="our-narrative">
+[L:6] +      <div className="our-narrative__container">
+[L:7] +        <h2 className="our-narrative__heading">Our Narrative</h2>
+[L:8] +
+[L:9] +        <p className="our-narrative__intro">
+[L:10] +          Wondrous Publishing is a visionary Pan-African publishing house dedicated to
+[L:11] +          transformative voices. We stand as a beacon for those whose stories have the power to
+[L:12] +          shift cultures and redefine the African intellectual landscape.
+[L:13] +        </p>
+[L:14] +
+[L:15] +        <div className="our-narrative__quote-block">
+[L:16] +          <blockquote className="our-narrative__quote">
+[L:17] +            "We believe books are not just ink on paper; they are seeds of destiny. Our calling is
+[L:18] +            to plant them across Africa and watch lives bloom."
+[L:19] +          </blockquote>
+[L:20] +          <cite className="our-narrative__cite">— MK Cyprian, Founder, Wondrous Publishing</cite>
+[L:21] +
+[L:22] +          <svg
+[L:23] +            className="our-narrative__quote-mark"
+[L:24] +            width="46"
+[L:25] +            height="15"
+[L:26] +            viewBox="0 0 46 15"
+[L:27] +            fill="none"
+[L:28] +            xmlns="http://www.w3.org/2000/svg"
+[L:29] +            aria-hidden="true"
+[L:30] +          >
+[L:31] +            <path
+[L:32] +              d="M14.5 15L17.375 10V10V10C16 10 14.8229 9.51042 13.8438 8.53125C12.8646 7.55208 12.375 6.375 12.375 5C12.375 3.625 12.8646 2.44792 13.8438 1.46875C14.8229 0.489583 16 0 17.375 0C18.75 0 19.9271 0.489583 20.9062 1.46875C21.8854 2.44792 22.375 3.625 22.375 5C22.375 5.47917 22.3177 5.92188 22.2031 6.32813C22.0885 6.73438 21.9167 7.125 21.6875 7.5L17.375 15H14.5V15M25.75 15L28.625 10V10V10C25.875 10 23.5208 9.51042 21.5625 8.53125C19.6042 7.55208 18.625 6.375 18.625 5C18.625 3.625 19.6146 2.44792 21.5938 1.46875C23.5729 0.489583 25.9271 0 28.625 0C31.325 0 33.6792 0.489583 35.6875 1.46875C37.6958 2.44792 38.875 3.625 38.875 5C38.875 5.47917 38.8177 5.92188 38.7031 6.32813C38.5885 6.73438 38.4167 7.125 38.1875 7.5L28.625 15H25.75V15"
+[L:33] +              fill="#E9C349"
+[L:34] +            />
+[L:35] +          </svg>
+[L:36] +        </div>
+[L:37] +
+[L:38] +        <div className="our-narrative__columns">
+[L:39] +          <div className="our-narrative__column">
+[L:40] +            <h3 className="our-narrative__column-heading">Our Mission</h3>
+[L:41] +            <p className="our-narrative__column-text">
+[L:42] +              To discover, publish, and promote high-impact destiny-focused works that inspire
+[L:43] +              personal growth, unlock human potential, and influence generations.
+[L:44] +            </p>
+[L:45] +          </div>
+[L:46] +
+[L:47] +          <div className="our-narrative__column">
+[L:48] +            <h3 className="our-narrative__column-heading">Our Vision</h3>
+[L:49] +            <p className="our-narrative__column-text">
+[L:50] +              To be Africa's leading publisher of transformational books that shape minds, ignite
+[L:51] +              purpose, and empower individuals to live fulfilled and impactful lives.
+[L:52] +            </p>
+[L:53] +          </div>
+[L:54] +        </div>
+[L:55] +      </div>
+[L:56] +    </section>
+[L:57] +  )
+[L:58] +}
+diff --git a/wonderous/pnpm-lock.yaml b/wonderous/pnpm-lock.yaml
+index d75f65a..c50c969 100644
+--- a/wonderous/pnpm-lock.yaml
++++ b/wonderous/pnpm-lock.yaml
+@@ -14,6 +14,9 @@ importers:
+[L:14]        react-dom:
+[L:15]          specifier: ^19.2.7
+[L:16]          version: 19.2.7(react@19.2.7)
+[L:17] +      react-router-dom:
+[L:18] +        specifier: ^7.18.1
+[L:19] +        version: 7.18.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+[L:20/17]      devDependencies:
+[L:21/18]        '@eslint/js':
+[L:22/19]          specifier: ^10.0.1
+@@ -444,6 +447,10 @@ packages:
+[L:447/444]    convert-source-map@2.0.0:
+[L:448/445]      resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
+[L:449/446]  
+[L:450] +  cookie@1.1.1:
+[L:451] +    resolution: {integrity: sha512-ei8Aos7ja0weRpFzJnEA9UHJ/7XQmqglbRwnf2ATjcB9Wq874VKH9kfjjirM6UhU2/E5fFYadylyhFldcqSidQ==}
+[L:452] +    engines: {node: '>=18'}
+[L:453] +
+[L:454/447]    cross-spawn@7.0.6:
+[L:455/448]      resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
+[L:456/449]      engines: {node: '>= 8'}
+@@ -783,6 +790,23 @@ packages:
+[L:790/783]      peerDependencies:
+[L:791/784]        react: ^19.2.7
+[L:792/785]  
+[L:793] +  react-router-dom@7.18.1:
+[L:794] +    resolution: {integrity: sha512-KaZh+X/6UtEp28x51AUYZDMg9NGoz2ja3dNHa+ta/tk40vCzKhQ/RypCWBMLbmDr6//E24Vv5uPsrqXFozdkAg==}
+[L:795] +    engines: {node: '>=20.0.0'}
+[L:796] +    peerDependencies:
+[L:797] +      react: '>=18'
+[L:798] +      react-dom: '>=18'
+[L:799] +
+[L:800] +  react-router@7.18.1:
+[L:801] +    resolution: {integrity: sha512-GDLgg3i3uM0aeJO3Fm+TCS+sDQ7gu12T6x0qdTEzcwqEfleci7JwugVNIF3U//0FWKnJT7ptG+20B2jfDqnZAg==}
+[L:802] +    engines: {node: '>=20.0.0'}
+[L:803] +    peerDependencies:
+[L:804] +      react: '>=18'
+[L:805] +      react-dom: '>=18'
+[L:806] +    peerDependenciesMeta:
+[L:807] +      react-dom:
+[L:808] +        optional: true
+[L:809] +
+[L:810/786]    react@19.2.7:
+[L:811/787]      resolution: {integrity: sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ==}
+[L:812/788]      engines: {node: '>=0.10.0'}
+@@ -804,6 +828,9 @@ packages:
+[L:828/804]      engines: {node: '>=10'}
+[L:829/805]      hasBin: true
+[L:830/806]  
+[L:831] +  set-cookie-parser@2.7.2:
+[L:832] +    resolution: {integrity: sha512-oeM1lpU/UvhTxw+g3cIfxXHyJRc/uidd3yK1P242gzHds0udQBYzs3y8j4gCCW+ZJ7ad0yctld8RYO+bdurlvw==}
+[L:833] +
+[L:834/807]    shebang-command@2.0.0:
+[L:835/808]      resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==}
+[L:836/809]      engines: {node: '>=8'}
+@@ -1324,6 +1351,8 @@ snapshots:
+[L:1351/1324]  
+[L:1352/1325]    convert-source-map@2.0.0: {}
+[L:1353/1326]  
+[L:1354] +  cookie@1.1.1: {}
+[L:1355] +
+[L:1356/1327]    cross-spawn@7.0.6:
+[L:1357/1328]      dependencies:
+[L:1358/1329]        path-key: 3.1.1
+@@ -1612,6 +1641,20 @@ snapshots:
+[L:1641/1612]        react: 19.2.7
+[L:1642/1613]        scheduler: 0.27.0
+[L:1643/1614]  
+[L:1644] +  react-router-dom@7.18.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+[L:1645] +    dependencies:
+[L:1646] +      react: 19.2.7
+[L:1647] +      react-dom: 19.2.7(react@19.2.7)
+[L:1648] +      react-router: 7.18.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+[L:1649] +
+[L:1650] +  react-router@7.18.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+[L:1651] +    dependencies:
+[L:1652] +      cookie: 1.1.1
+[L:1653] +      react: 19.2.7
+[L:1654] +      set-cookie-parser: 2.7.2
+[L:1655] +    optionalDependencies:
+[L:1656] +      react-dom: 19.2.7(react@19.2.7)
+[L:1657] +
+[L:1658/1615]    react@19.2.7: {}
+[L:1659/1616]  
+[L:1660/1617]    rolldown@1.1.4:
+@@ -1641,6 +1684,8 @@ snapshots:
+[L:1684/1641]  
+[L:1685/1642]    semver@7.8.5: {}
+[L:1686/1643]  
+[L:1687] +  set-cookie-parser@2.7.2: {}
+[L:1688] +
+[L:1689/1644]    shebang-command@2.0.0:
+[L:1690/1645]      dependencies:
+[L:1691/1646]        shebang-regex: 3.0.0
+diff --git a/wonderous/src/pages/AboutUs.tsx b/wonderous/src/pages/AboutUs.tsx
+new file mode 100644
+index 0000000..85c6423
+--- /dev/null
++++ b/wonderous/src/pages/AboutUs.tsx
+@@ -0,0 +1,19 @@
+[L:1] +import { Header } from '../components/layout/Header'
+[L:2] +import { Footer } from '../components/layout/Footer'
+[L:3] +import { AboutHero } from '../components/sections/AboutHero'
+[L:4] +import { OurNarrative } from '../components/sections/OurNarrative'
+[L:5] +import { CoreValues } from '../components/sections/CoreValues'
+[L:6] +
+[L:7] +export function AboutUs() {
+[L:8] +  return (
+[L:9] +    <>
+[L:10] +      <Header />
+[L:11] +      <main id="main-content" tabIndex={-1}>
+[L:12] +        <AboutHero />
+[L:13] +        <OurNarrative />
+[L:14] +        <CoreValues />
+[L:15] +      </main>
+[L:16] +      <Footer />
+[L:17] +    </>
+[L:18] +  )
+[L:19] +}
+diff --git a/wonderous/package.json b/wonderous/package.json
+index 016f301..8b01aa1 100644
+--- a/wonderous/package.json
++++ b/wonderous/package.json
+@@ -11,7 +11,8 @@
+[L:11]    },
+[L:12]    "dependencies": {
+[L:13]      "react": "^19.2.7",
+[L:14] -    "react-dom": "^19.2.7"
+[L:14] +    "react-dom": "^19.2.7",
+[L:15] +    "react-router-dom": "^7.18.1"
+[L:16/15]    },
+[L:17/16]    "devDependencies": {
+[L:18/17]      "@eslint/js": "^10.0.1",
+diff --git a/wonderous/src/components/sections/OurNarrative.css b/wonderous/src/components/sections/OurNarrative.css
+new file mode 100644
+index 0000000..6c5c870
+--- /dev/null
++++ b/wonderous/src/components/sections/OurNarrative.css
+@@ -0,0 +1,153 @@
+[L:1] +.our-narrative {
+[L:2] +  display: flex;
+[L:3] +  padding: 96px 192px;
+[L:4] +  flex-direction: column;
+[L:5] +  align-items: flex-start;
+[L:6] +  background: var(--header-bg);
+[L:7] +
+[L:8] +  @media (max-width: 1200px) {
+[L:9] +    padding: 80px 64px;
+[L:10] +  }
+[L:11] +
+[L:12] +  @media (max-width: 1024px) {
+[L:13] +    padding: 64px 24px;
+[L:14] +  }
+[L:15] +
+[L:16] +  @media (max-width: 640px) {
+[L:17] +    padding: 48px 16px;
+[L:18] +  }
+[L:19] +}
+[L:20] +
+[L:21] +.our-narrative__container {
+[L:22] +  display: flex;
+[L:23] +  max-width: 896px;
+[L:24] +  width: 100%;
+[L:25] +  margin: 0 auto;
+[L:26] +  flex-direction: column;
+[L:27] +  align-items: center;
+[L:28] +  gap: 32px;
+[L:29] +}
+[L:30] +
+[L:31] +.our-narrative__heading {
+[L:32] +  margin: 0;
+[L:33] +  color: #fff;
+[L:34] +  text-align: center;
+[L:35] +  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+[L:36] +  font-size: 48px;
+[L:37] +  font-weight: 600;
+[L:38] +  line-height: 56px;
+[L:39] +  letter-spacing: -0.96px;
+[L:40] +
+[L:41] +  @media (max-width: 640px) {
+[L:42] +    font-size: 36px;
+[L:43] +    line-height: 44px;
+[L:44] +  }
+[L:45] +}
+[L:46] +
+[L:47] +.our-narrative__intro {
+[L:48] +  align-self: stretch;
+[L:49] +  margin: 0;
+[L:50] +  color: rgba(255, 255, 255, 0.8);
+[L:51] +  text-align: center;
+[L:52] +  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+[L:53] +  font-size: 18px;
+[L:54] +  font-weight: 400;
+[L:55] +  line-height: 162.5%;
+[L:56] +}
+[L:57] +
+[L:58] +.our-narrative__quote-block {
+[L:59] +  position: relative;
+[L:60] +  display: flex;
+[L:61] +  padding: 80px 32px 66px;
+[L:62] +  flex-direction: column;
+[L:63] +  align-items: center;
+[L:64] +  gap: 34px;
+[L:65] +  align-self: stretch;
+[L:66] +  border-top: 1px solid rgba(192, 200, 195, 0.2);
+[L:67] +  border-bottom: 1px solid rgba(192, 200, 195, 0.2);
+[L:68] +
+[L:69] +  @media (max-width: 640px) {
+[L:70] +    padding: 56px 16px 48px;
+[L:71] +  }
+[L:72] +}
+[L:73] +
+[L:74] +.our-narrative__quote {
+[L:75] +  align-self: stretch;
+[L:76] +  margin: 0;
+[L:77] +  color: #fff;
+[L:78] +  text-align: center;
+[L:79] +  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+[L:80] +  font-size: 32px;
+[L:81] +  font-style: italic;
+[L:82] +  font-weight: 500;
+[L:83] +  line-height: 40px;
+[L:84] +
+[L:85] +  @media (max-width: 640px) {
+[L:86] +    font-size: 24px;
+[L:87] +    line-height: 32px;
+[L:88] +  }
+[L:89] +}
+[L:90] +
+[L:91] +.our-narrative__cite {
+[L:92] +  color: var(--accent-yellow-light);
+[L:93] +  text-align: center;
+[L:94] +  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+[L:95] +  font-size: 14px;
+[L:96] +  font-style: normal;
+[L:97] +  font-weight: 600;
+[L:98] +  line-height: 20px;
+[L:99] +  letter-spacing: 1.4px;
+[L:100] +  text-transform: uppercase;
+[L:101] +}
+[L:102] +
+[L:103] +.our-narrative__quote-mark {
+[L:104] +  position: absolute;
+[L:105] +  left: 50%;
+[L:106] +  bottom: -7px;
+[L:107] +  padding: 0 16px;
+[L:108] +  background: var(--header-bg);
+[L:109] +  transform: translateX(-50%);
+[L:110] +}
+[L:111] +
+[L:112] +.our-narrative__columns {
+[L:113] +  display: flex;
+[L:114] +  padding-top: 64px;
+[L:115] +  justify-content: center;
+[L:116] +  align-items: flex-start;
+[L:117] +  gap: 48px;
+[L:118] +  align-self: stretch;
+[L:119] +
+[L:120] +  @media (max-width: 768px) {
+[L:121] +    flex-direction: column;
+[L:122] +    padding-top: 40px;
+[L:123] +    gap: 32px;
+[L:124] +  }
+[L:125] +}
+[L:126] +
+[L:127] +.our-narrative__column {
+[L:128] +  display: flex;
+[L:129] +  flex: 1 0 0;
+[L:130] +  flex-direction: column;
+[L:131] +  align-items: flex-start;
+[L:132] +  gap: 24px;
+[L:133] +}
+[L:134] +
+[L:135] +.our-narrative__column-heading {
+[L:136] +  align-self: stretch;
+[L:137] +  margin: 0;
+[L:138] +  color: #e9c349;
+[L:139] +  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+[L:140] +  font-size: 24px;
+[L:141] +  font-weight: 500;
+[L:142] +  line-height: 32px;
+[L:143] +}
+[L:144] +
+[L:145] +.our-narrative__column-text {
+[L:146] +  align-self: stretch;
+[L:147] +  margin: 0;
+[L:148] +  color: rgba(255, 255, 255, 0.7);
+[L:149] +  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+[L:150] +  font-size: 16px;
+[L:151] +  font-weight: 400;
+[L:152] +  line-height: 162.5%;
+[L:153] +}
+diff --git a/wonderous/src/components/ui/NavDropdown.tsx b/wonderous/src/components/ui/NavDropdown.tsx
+index 0c6cf70..fb0757a 100644
+--- a/wonderous/src/components/ui/NavDropdown.tsx
++++ b/wonderous/src/components/ui/NavDropdown.tsx
+@@ -1,10 +1,12 @@
+[L:1]  import { useState, type CSSProperties } from 'react'
+[L:2] +import { Link } from 'react-router-dom'
+[L:3/2]  import watermark from '../../assets/pngwing.com.png'
+[L:4] +import type { NavMenuItem } from '../../utils/navMenus'
+[L:5/3]  
+[L:6/4]  export interface NavDropdownProps {
+[L:7/5]    label: string
+[L:8/6]    heading: string
+[L:7] -  items: string[]
+[L:9] +  items: NavMenuItem[]
+[L:10/8]    active?: boolean
+[L:11/9]  }
+[L:12/10]  
+@@ -44,11 +46,18 @@ export function NavDropdown({ label, heading, items, active }: NavDropdownProps)
+[L:46/44]            <span className="nav-dropdown__heading">{heading}</span>
+[L:47/45]            <ul className="nav-dropdown__list">
+[L:48/46]              {items.map((item, index) => (
+[L:47] -              <li key={item} style={{ '--stagger': index } as CSSProperties}>
+[L:48] -                <a href="#" className="cursor-target">
+[L:49] -                  <span className="nav-item-bg" aria-hidden="true" />
+[L:50] -                  <span className="nav-item-label">{item}</span>
+[L:51] -                </a>
+[L:49] +              <li key={item.label} style={{ '--stagger': index } as CSSProperties}>
+[L:50] +                {item.href ? (
+[L:51] +                  <Link to={item.href} className="cursor-target">
+[L:52] +                    <span className="nav-item-bg" aria-hidden="true" />
+[L:53] +                    <span className="nav-item-label">{item.label}</span>
+[L:54] +                  </Link>
+[L:55] +                ) : (
+[L:56] +                  <a href="#" className="cursor-target">
+[L:57] +                    <span className="nav-item-bg" aria-hidden="true" />
+[L:58] +                    <span className="nav-item-label">{item.label}</span>
+[L:59] +                  </a>
+[L:60] +                )}
+[L:61/52]                </li>
+[L:62/53]              ))}
+[L:63/54]            </ul>
+diff --git a/wonderous/src/main.tsx b/wonderous/src/main.tsx
+index d68fac9..c5737d6 100644
+--- a/wonderous/src/main.tsx
++++ b/wonderous/src/main.tsx
+@@ -1,10 +1,13 @@
+[L:1]  import { StrictMode } from 'react'
+[L:2]  import { createRoot } from 'react-dom/client'
+[L:3] +import { BrowserRouter } from 'react-router-dom'
+[L:4/3]  import './styles/index.css'
+[L:5/4]  import App from './App.tsx'
+[L:6/5]  
+[L:7/6]  createRoot(document.getElementById('root')!).render(
+[L:8/7]    <StrictMode>
+[L:8] -    <App />
+[L:9] +    <BrowserRouter>
+[L:10] +      <App />
+[L:11] +    </BrowserRouter>
+[L:12/9]    </StrictMode>,
+[L:13/10]  )
+diff --git a/wonderous/src/components/sections/AboutHero.tsx b/wonderous/src/components/sections/AboutHero.tsx
+new file mode 100644
+index 0000000..9e87a9b
+--- /dev/null
++++ b/wonderous/src/components/sections/AboutHero.tsx
+@@ -0,0 +1,38 @@
+[L:1] +import './AboutHero.css'
+[L:2] +
+[L:3] +export function AboutHero() {
+[L:4] +  return (
+[L:5] +    <section className="about-hero">
+[L:6] +      <div className="about-hero__scrim" aria-hidden="true" />
+[L:7] +      <div className="about-hero__gradient" aria-hidden="true" />
+[L:8] +
+[L:9] +      <div className="about-hero__container">
+[L:10] +        <span className="about-hero__eyebrow">A Visionary Narrative</span>
+[L:11] +
+[L:12] +        <h1 className="about-hero__heading">
+[L:13] +          The Architecture
+[L:14] +          <br />
+[L:15] +          of Ambition
+[L:16] +        </h1>
+[L:17] +
+[L:18] +        <div className="about-hero__quote-panel">
+[L:19] +          <p className="about-hero__quote">
+[L:20] +            "Engineering platforms for destiny-shaping and intellectual actualization."
+[L:21] +          </p>
+[L:22] +        </div>
+[L:23] +      </div>
+[L:24] +
+[L:25] +      <svg
+[L:26] +        className="about-hero__scroll-cue"
+[L:27] +        width="18"
+[L:28] +        height="9"
+[L:29] +        viewBox="0 0 18 9"
+[L:30] +        fill="none"
+[L:31] +        xmlns="http://www.w3.org/2000/svg"
+[L:32] +        aria-hidden="true"
+[L:33] +      >
+[L:34] +        <path d="M9 5.55L0 1.05L1.05 0L9 3.45L16.95 0L18 1.05L9 5.55Z" fill="white" fillOpacity="0.5" />
+[L:35] +      </svg>
+[L:36] +    </section>
+[L:37] +  )
+[L:38] +}
+diff --git a/wonderous/src/components/ui/MobileAccordion.tsx b/wonderous/src/components/ui/MobileAccordion.tsx
+index 64e7c77..4139ebf 100644
+--- a/wonderous/src/components/ui/MobileAccordion.tsx
++++ b/wonderous/src/components/ui/MobileAccordion.tsx
+@@ -1,9 +1,11 @@
+[L:1]  import { useState } from 'react'
+[L:2] +import { Link } from 'react-router-dom'
+[L:3] +import type { NavMenuItem } from '../../utils/navMenus'
+[L:4/2]  
+[L:5/3]  export interface MobileAccordionProps {
+[L:6/4]    label: string
+[L:7/5]    heading: string
+[L:6] -  items: string[]
+[L:8] +  items: NavMenuItem[]
+[L:9/7]    onNavigate: () => void
+[L:10/8]  }
+[L:11/9]  
+@@ -35,10 +37,16 @@ export function MobileAccordion({ label, heading, items, onNavigate }: MobileAcc
+[L:37/35]            <span className="mobile-menu__accordion-heading">{heading}</span>
+[L:38/36]            <ul className="mobile-menu__accordion-list">
+[L:39/37]              {items.map((item) => (
+[L:38] -              <li key={item}>
+[L:39] -                <a href="#" onClick={onNavigate}>
+[L:40] -                  {item}
+[L:41] -                </a>
+[L:40] +              <li key={item.label}>
+[L:41] +                {item.href ? (
+[L:42] +                  <Link to={item.href} onClick={onNavigate}>
+[L:43] +                    {item.label}
+[L:44] +                  </Link>
+[L:45] +                ) : (
+[L:46] +                  <a href="#" onClick={onNavigate}>
+[L:47] +                    {item.label}
+[L:48] +                  </a>
+[L:49] +                )}
+[L:50/42]                </li>
+[L:51/43]              ))}
+[L:52/44]            </ul>

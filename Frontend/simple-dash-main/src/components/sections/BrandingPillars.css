@@ -1,0 +1,142 @@
+.branding-pillars {
+  display: flex;
+  padding: 96px 0;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  background: #f4f4f0;
+
+  @media (max-width: 1024px) {
+    padding: 64px 0;
+  }
+
+  @media (max-width: 640px) {
+    padding: 48px 0;
+  }
+}
+
+.branding-pillars__container {
+  display: flex;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 64px;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+
+  @media (max-width: 1024px) {
+    padding: 0 40px;
+    gap: 48px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 0 20px;
+  }
+}
+
+.branding-pillars__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 19px;
+}
+
+.branding-pillars__eyebrow {
+  color: var(--brand-emerald);
+  text-align: center;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.branding-pillars__heading {
+  margin: 0;
+  color: #12a45c;
+  text-align: center;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: clamp(28px, 3.4vw, 32px);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.branding-pillars__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  align-self: stretch;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.branding-pillars__card {
+  display: flex;
+  padding: 40px;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid #c0c8c3;
+  background: #faf9f5;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.branding-pillars__icon {
+  display: flex;
+  padding-bottom: 24px;
+  align-items: flex-start;
+  color: var(--brand-emerald);
+}
+
+.branding-pillars__card-title {
+  margin: 0;
+  padding-bottom: 16px;
+  color: #12a45c;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.branding-pillars__description {
+  margin: 0;
+  padding-bottom: 24px;
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.branding-pillars__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.branding-pillars__list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #1b1c1a;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+}
+
+.branding-pillars__bullet {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #ffffff;
+}

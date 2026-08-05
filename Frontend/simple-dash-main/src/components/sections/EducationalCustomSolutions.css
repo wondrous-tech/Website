@@ -1,0 +1,223 @@
+.educational-custom {
+  display: flex;
+  padding: 96px 64px;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #faf9f5;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    padding: 64px 40px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 48px 20px;
+  }
+}
+
+.educational-custom__container {
+  display: flex;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  align-items: center;
+  gap: 64px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 48px;
+  }
+}
+
+.educational-custom__visual {
+  position: relative;
+  flex: 1 0 0;
+}
+
+.educational-custom__glow {
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: 160px;
+  height: 160px;
+  border-radius: 12px;
+  background: rgba(115, 92, 0, 0.1);
+  filter: blur(32px);
+}
+
+.educational-custom__image {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid #c0c8c3;
+  transition: transform 0.4s ease;
+}
+
+.educational-custom__visual:hover .educational-custom__image {
+  transform: scale(1.02);
+}
+
+.educational-custom__badge {
+  position: absolute;
+  right: -32px;
+  bottom: -32px;
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  background: #12a45c;
+
+  @media (max-width: 640px) {
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+  }
+}
+
+.educational-custom__badge-title {
+  color: #fff;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.educational-custom__badge-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.educational-custom__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  flex: 1 0 0;
+}
+
+.educational-custom__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.educational-custom__heading {
+  margin: 0;
+  color: #12a45c;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: clamp(32px, 4.4vw, 48px);
+  font-weight: 600;
+  line-height: 1.17;
+  letter-spacing: -0.96px;
+}
+
+.educational-custom__subtext {
+  margin: 0;
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 29.25px;
+}
+
+.educational-custom__list {
+  display: flex;
+  padding: 8px 0 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+  margin: 0;
+  list-style: none;
+}
+
+.educational-custom__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.educational-custom__icon {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: rgba(115, 92, 0, 0.08);
+  color: #735c00;
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.educational-custom__item:hover .educational-custom__icon {
+  background: var(--brand-emerald);
+  transform: scale(1.08);
+}
+
+.educational-custom__item-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.educational-custom__item-title {
+  margin: 0;
+  color: #12a45c;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+}
+
+.educational-custom__item-description {
+  margin: 0;
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.educational-custom__cta {
+  display: flex;
+  padding: 16px 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  background: #12a45c;
+  color: #fff;
+  text-align: center;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.educational-custom__cta:hover {
+  background: #123f30;
+  transform: translateY(-1px);
+}
+
+.educational-custom__cta:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}

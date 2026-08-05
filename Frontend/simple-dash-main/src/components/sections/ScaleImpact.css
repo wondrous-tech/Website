@@ -1,0 +1,289 @@
+.scale-impact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 96px 64px;
+  background: #efeeea;
+
+  @media (max-width: 1024px) {
+    padding: 72px 24px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 56px 0;
+  }
+}
+
+.scale-impact__container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 64px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    gap: 48px;
+  }
+}
+
+.scale-impact__intro {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+
+  @media (max-width: 640px) {
+    padding: 0 16px;
+  }
+}
+
+.scale-impact__title {
+  margin: 0;
+  color: #12a45c;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: clamp(32px, 3.4vw, 48px);
+  font-weight: 600;
+  line-height: 1.16;
+  letter-spacing: -0.96px;
+}
+
+.scale-impact__description {
+  margin: 0;
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 155.556%;
+}
+
+.scale-impact__features {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+  margin: 0;
+  padding: 16px 0 0;
+  list-style: none;
+}
+
+.scale-impact__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.scale-impact__feature-icon {
+  display: flex;
+  flex-shrink: 0;
+  padding: 12px;
+  border-radius: 4px;
+  background: rgba(20, 77, 55, 0.1);
+}
+
+.scale-impact__feature-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.scale-impact__feature-title {
+  margin: 0;
+  color: #12a45c;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.scale-impact__feature-description {
+  margin: 0;
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.scale-impact__form-panel {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 40px;
+  border: 1px solid #c0c8c3;
+  background: #faf9f5;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+  @media (max-width: 640px) {
+    width: 100%;
+    padding: 24px 16px;
+    border-left: none;
+    border-right: none;
+  }
+}
+
+.scale-impact__form-title {
+  margin: 0;
+  color: #12a45c;
+  font-family: 'EB Garamond', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.scale-impact__form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+}
+
+.scale-impact__row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+}
+
+.scale-impact__field {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.scale-impact__label {
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.scale-impact__input {
+  width: 100%;
+  padding: 9px 0 10px;
+  border: none;
+  border-bottom: 1px solid #717974;
+  border-radius: 0;
+  background: none;
+  color: #1b1c1a;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  transition: border-color 0.2s ease;
+}
+
+.scale-impact__input::placeholder {
+  color: #6b7280;
+}
+
+.scale-impact__input:focus {
+  outline: none;
+  border-color: #12a45c;
+}
+
+.scale-impact__select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B7280' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+  padding-right: 28px;
+  cursor: pointer;
+}
+
+.scale-impact__textarea {
+  resize: vertical;
+  min-height: 72px;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.scale-impact__submit-btn {
+  display: flex;
+  padding: 16px 0;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  border: none;
+  border-radius: 12px;
+  background: #12a45c;
+  color: #fff;
+  text-align: center;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.scale-impact__submit-btn:hover {
+  opacity: 0.85;
+}
+
+.scale-impact__submit-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.scale-impact__success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+}
+
+.scale-impact__success-text {
+  margin: 0;
+  color: #414944;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.scale-impact__reset-btn {
+  margin-top: 4px;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid transparent;
+  background: none;
+  color: #12a45c;
+  font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.scale-impact__reset-btn:hover {
+  color: #735c00;
+  border-color: #735c00;
+}
+
+.scale-impact__reset-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}

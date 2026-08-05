@@ -1,0 +1,231 @@
+.hero-bg {
+  position: relative;
+  min-height: clamp(560px, 74svh, 760px);
+  display: flex;
+  align-items: center;
+  padding: clamp(56px, 7vw, 84px) clamp(24px, 4vw, 64px) clamp(56px, 7vw, 84px);
+  overflow: hidden;
+  color: #fff;
+  background: #050b08;
+}
+
+.hero-bg__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: transparent;
+  isolation: isolate;
+}
+
+.hero-bg__left-overlay {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: clamp(540px, 70vw, 860px);
+  background: linear-gradient(90deg, rgba(2, 24, 13, 0.95) 0%, rgba(2, 24, 13, 0.78) 40%, rgba(2, 24, 13, 0.28) 70%, rgba(2, 24, 13, 0.04) 86%, rgba(2, 24, 13, 0) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-bg__image-shell {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: transparent;
+  z-index: 0;
+}
+
+.hero-bg__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  transform: none;
+  filter: saturate(1.02) contrast(1.03) brightness(1.02);
+}
+
+.hero-bg__image-shell--active .hero-bg__image {
+  animation: hero-bg-fade 0.8s ease both;
+}
+
+
+.hero-bg__content {
+  position: relative;
+  z-index: 1;
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.hero-bg__copy {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding-left: clamp(4px, 1vw, 12px);
+}
+
+.hero-bg__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 224, 136, 0.22);
+  background: rgba(4, 20, 15, 0.54);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #ffe28a;
+  box-shadow: none;
+}
+
+.hero-bg__heading {
+  margin: 0;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(36px, 4.7vw, 62px);
+  line-height: 0.96;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  text-shadow: none;
+}
+
+.hero-bg__heading-accent {
+  color: #ffe28a;
+}
+
+.hero-bg__description {
+  margin: 0;
+  max-width: 520px;
+  font-size: 17px;
+  line-height: 1.58;
+  color: rgba(232, 247, 237, 0.95);
+  text-shadow: none;
+}
+
+.hero-bg__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.hero-bg__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.hero-bg__cta:hover {
+  transform: translateY(-1px);
+}
+
+.hero-bg__cta--primary {
+  background: #ffe28a;
+  color: #2f2400;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+}
+
+.hero-bg__cta--ghost {
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.hero-bg__indicators {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: clamp(24px, 3vw, 36px);
+  align-self: center;
+}
+
+.hero-bg__indicator {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.42);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.hero-bg__indicator--active {
+  background: var(--accent-yellow-light);
+  transform: scale(1.16);
+}
+
+@keyframes hero-bg-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .hero-bg {
+    min-height: 720px;
+  }
+
+  .hero-bg__content {
+    justify-content: center;
+  }
+
+  .hero-bg__copy {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-bg__actions {
+    justify-content: center;
+  }
+
+  .hero-bg__indicators {
+    flex-direction: row;
+    justify-content: center;
+    align-self: auto;
+    margin-left: 0;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-bg {
+    min-height: 640px;
+    padding-inline: 18px;
+    padding-bottom: 74px;
+  }
+
+  .hero-bg__copy {
+    gap: 14px;
+  }
+
+  .hero-bg__description {
+    font-size: 15px;
+  }
+
+  .hero-bg__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-bg__cta {
+    width: 100%;
+  }
+}

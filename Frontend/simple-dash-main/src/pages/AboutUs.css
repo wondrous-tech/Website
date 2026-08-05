@@ -1,0 +1,22 @@
+.about-page__stage {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: aboutStageIn 900ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+.about-page__stage--1 { animation-delay: 0ms; }
+.about-page__stage--2 { animation-delay: 260ms; }
+.about-page__stage--3 { animation-delay: 460ms; }
+
+@keyframes aboutStageIn {
+  0%   { opacity: 0; transform: translateY(28px); filter: blur(6px); }
+  60%  { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page__stage {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
