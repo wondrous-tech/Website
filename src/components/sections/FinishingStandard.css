@@ -4,7 +4,7 @@
   padding: 96px 64px;
   flex-direction: column;
   align-items: center;
-  background: var(--header-bg);
+  background: var(--brand-emerald-deep);
   overflow: hidden;
 
   @media (max-width: 1024px) {

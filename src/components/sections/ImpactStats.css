@@ -3,7 +3,7 @@
   padding: 64px;
   justify-content: center;
   align-items: center;
-  background: var(--header-bg);
+  background: var(--brand-emerald-deep);
 
   @media (max-width: 1024px) {
     padding: 48px 24px;

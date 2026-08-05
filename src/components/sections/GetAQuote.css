@@ -62,7 +62,7 @@
   padding: 32px;
   border-radius: var(--radius-2xl);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  background: var(--header-bg);
+  background: var(--brand-emerald-deep);
   color: #fff;
   box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
@@ -251,7 +251,7 @@
 }
 
 .get-a-quote__step-dot--active {
-  background: var(--header-bg);
+  background: var(--brand-emerald-deep);
   color: #fff;
   transform: scale(1.1);
 }
@@ -409,7 +409,7 @@
 
 .get-a-quote__choice-btn--active {
   border-color: var(--text-primary);
-  background: var(--header-bg);
+  background: var(--brand-emerald-deep);
   color: #fff;
 }
 
@@ -456,7 +456,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--header-bg);
+  background: var(--brand-emerald-deep);
 }
 
 .get-a-quote__nav {
@@ -488,7 +488,7 @@
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
-  background: var(--header-bg);
+  background: var(--brand-emerald-deep);
   color: #fff;
   font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 13px;
@@ -621,7 +621,7 @@
   align-items: center;
   padding: 10px 20px;
   border-radius: 8px;
-  background: var(--header-bg);
+  background: var(--brand-emerald-deep);
   color: #fff;
   font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 13px;

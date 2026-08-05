@@ -45,7 +45,7 @@
 }
 
 .jobs-hero__eyebrow {
-  color: #ffffff;
+  color: var(--brand-emerald-deep);
   font-family: 'Hanken Grotesk', -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 14px;
   font-weight: 600;

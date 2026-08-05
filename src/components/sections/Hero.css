@@ -48,7 +48,7 @@
   position: relative;
   max-width: 1180px;
   margin: 0 auto;
-  min-height: clamp(460px, 64vh, 640px);
+  min-height: clamp(420px, 56vh, 560px);
 }
 
 .hero__slide {
