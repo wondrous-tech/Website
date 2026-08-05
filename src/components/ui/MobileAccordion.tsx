@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import type { NavMenuItem } from '../../utils/navMenus'
 
@@ -7,9 +7,10 @@ export interface MobileAccordionProps {
   items: NavMenuItem[]
   onNavigate: () => void
   activeHref?: string
+  icon?: ReactNode
 }
 
-export function MobileAccordion({ label, items, onNavigate, activeHref }: MobileAccordionProps) {
+export function MobileAccordion({ label, items, onNavigate, activeHref, icon }: MobileAccordionProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -20,7 +21,10 @@ export function MobileAccordion({ label, items, onNavigate, activeHref }: Mobile
         aria-expanded={open}
         onClick={() => setOpen((prev) => !prev)}
       >
-        {label}
+        <span className="mobile-menu__label">
+          {icon ? <span className="mobile-menu__icon">{icon}</span> : null}
+          {label}
+        </span>
         <svg
           className={`nav-dropdown__chevron${open ? ' nav-dropdown__chevron--open' : ''}`}
           width="12"
@@ -32,6 +36,7 @@ export function MobileAccordion({ label, items, onNavigate, activeHref }: Mobile
           <path d="M6 7.4L0 1.4L1.4 0L6 4.6L10.6 0L12 1.4L6 7.4V7.4" fill="currentColor" />
         </svg>
       </button>
+
       <div className={`mobile-menu__accordion-panel${open ? ' mobile-menu__accordion-panel--open' : ''}`}>
         <div className="mobile-menu__accordion-inner">
           <ul className="mobile-menu__accordion-list">

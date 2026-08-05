@@ -1,5 +1,18 @@
 import { useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import {
+  BookOpen,
+  Compass,
+  HelpCircle,
+  Home,
+  Layers,
+  Mail,
+  Newspaper,
+  PenLine,
+  ShoppingBag,
+  Trophy,
+  type LucideIcon,
+} from 'lucide-react'
 import logo from '../../assets/logo.jpeg'
 import { useMobileMenu } from '../../hooks/useMobileMenu'
 import { useScrollDirection } from '../../hooks/useScrollDirection'
@@ -9,6 +22,15 @@ import { NavDropdown } from '../ui/NavDropdown'
 import './Header.css'
 
 const DESKTOP_BREAKPOINT = 1024
+
+const menuIcons: Record<string, LucideIcon> = {
+  Explore: Compass,
+  Solutions: Layers,
+  Editing: PenLine,
+  'Buy/Sell': ShoppingBag,
+  Books: BookOpen,
+}
+
 
 function getActiveMenuLabel(pathname: string, hash: string) {
   if (pathname.startsWith('/solutions')) return 'Solutions'
@@ -241,38 +263,48 @@ export function Header() {
               to="/"
               onClick={mobileMenu.close}
             >
+              <span className="mobile-menu__icon"><Home size={18} /></span>
               Home
             </Link>
 
-            {navMenus.map((menu) => (
-              <MobileAccordion
-                key={menu.label}
-                label={menu.label}
-                items={menu.items}
-                onNavigate={mobileMenu.close}
-                activeHref={activeHref}
-              />
-            ))}
+            {navMenus.map((menu) => {
+              const MenuIcon = menuIcons[menu.label] ?? Compass
+              return (
+                <MobileAccordion
+                  key={menu.label}
+                  label={menu.label}
+                  items={menu.items}
+                  onNavigate={mobileMenu.close}
+                  activeHref={activeHref}
+                  icon={<MenuIcon size={18} />}
+                />
+              )
+            })}
 
             <Link
               className={`mobile-menu__link${location.pathname === '/contact' ? ' mobile-menu__link--active' : ''}`}
               to="/contact"
               onClick={mobileMenu.close}
             >
+              <span className="mobile-menu__icon"><Mail size={18} /></span>
               Contact
             </Link>
 
             <div className="mobile-menu__divider" />
 
             <Link className="mobile-menu__link" to="/#pneuma-awards" onClick={mobileMenu.close}>
+              <span className="mobile-menu__icon"><Trophy size={18} /></span>
               Pneuma Awards
             </Link>
             <Link className="mobile-menu__link" to="/faq" onClick={mobileMenu.close}>
+              <span className="mobile-menu__icon"><HelpCircle size={18} /></span>
               FAQs
             </Link>
             <Link className="mobile-menu__link" to="/blog" onClick={mobileMenu.close}>
+              <span className="mobile-menu__icon"><Newspaper size={18} /></span>
               Blogs
             </Link>
+
 
             <div className="mobile-menu__actions">
               <Link className="mobile-menu__cta mobile-menu__cta--outline" to="/partners" onClick={mobileMenu.close}>
