@@ -9,15 +9,25 @@ let transporter = null
 function getTransporter() {
   if (!config.smtp.host || !config.smtp.user || !config.smtp.pass) return null
   if (!transporter) {
+    console.log(
+      `[mail] creating transport host=${config.smtp.host} port=${config.smtp.port} secure=${config.smtp.secure} user=${config.smtp.user}`,
+    )
     transporter = nodemailer.createTransport({
       host: config.smtp.host,
       port: config.smtp.port,
-      secure: config.smtp.secure,
+      secure: config.smtp.secure, // false for 587 (STARTTLS)
+      requireTLS: !config.smtp.secure,
       auth: { user: config.smtp.user, pass: config.smtp.pass },
+      connectionTimeout: 30000,
+      greetingTimeout: 30000,
+      socketTimeout: 30000,
+      logger: true,
+      debug: true,
     })
   }
   return transporter
 }
+
 
 const label = (key) =>
   key
@@ -106,15 +116,32 @@ export async function sendSubmissionEmail(record) {
       </table>
     </div>`
 
-  await transport.sendMail({
-    from: config.mail.from,
-    to: config.mail.to,
-    replyTo: record.email || undefined,
-    subject: `New ${record.type || 'general'} request from ${record.name}`,
-    text,
-    html,
-    attachments: attachmentPath ? [{ path: attachmentPath }] : [],
-  })
+  console.log(
+    `[mail] sending id=${record.id} to=${config.mail.to} attachment=${attachmentPath ? 'yes' : 'no'}`,
+  )
 
-  return { sent: true }
+  try {
+    const info = await transport.sendMail({
+      from: config.mail.from,
+      to: config.mail.to,
+      replyTo: record.email || undefined,
+      subject: `New ${record.type || 'general'} request from ${record.name}`,
+      text,
+      html,
+      attachments: attachmentPath ? [{ path: attachmentPath }] : [],
+    })
+    console.log(`[mail] sent id=${record.id} messageId=${info.messageId} response=${info.response}`)
+    return { sent: true }
+  } catch (error) {
+    console.error(
+      `[mail] failed id=${record.id} code=${error.code || 'n/a'} command=${error.command || 'n/a'}: ${error.message}`,
+    )
+    if (error.code === 'ETIMEDOUT' || error.code === 'ECONNECTION') {
+      console.error(
+        '[mail] SMTP connection timed out. Port 587 is often blocked by the host — try SMTP_PORT=2525 (Brevo also accepts 2525) or SMTP_PORT=465 with SMTP_SECURE=true.',
+      )
+    }
+    throw error
+  }
 }
+
