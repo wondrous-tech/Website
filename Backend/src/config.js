@@ -33,12 +33,12 @@ export const config = {
   // Public URL of THIS backend, used to build absolute upload links in emails.
   publicUrl: (process.env.PUBLIC_URL || '').replace(/\/+$/, ''),
 
-  // SMTP transport for Nodemailer (Gmail: smtp.gmail.com:465, app password).
+  // SMTP transport for Nodemailer (Brevo relay: smtp-relay.brevo.com:587, STARTTLS).
   smtp: {
-    host: process.env.SMTP_HOST || '',
-    port: int(process.env.SMTP_PORT, 465),
-    secure: (process.env.SMTP_SECURE || 'true') !== 'false',
-    user: process.env.SMTP_USER || '',
+    host: process.env.SMTP_HOST || 'smtp-relay.brevo.com',
+    port: int(process.env.SMTP_PORT, 587),
+    secure: (process.env.SMTP_SECURE || 'false') === 'true',
+    user: process.env.SMTP_USER || 'b48073001@smtp-brevo.com',
     pass: process.env.SMTP_PASS || '',
   },
 
