@@ -3,6 +3,8 @@ import path from 'node:path'
 import nodemailer from 'nodemailer'
 import { config } from './config.js'
 
+const BREVO_ENDPOINT = 'https://api.brevo.com/v3/smtp/email'
+
 let transporter = null
 
 /** Lazily builds the SMTP transport. Returns null when SMTP is not configured. */
@@ -10,7 +12,7 @@ function getTransporter() {
   if (!config.smtp.host || !config.smtp.user || !config.smtp.pass) return null
   if (!transporter) {
     console.log(
-      `[mail] creating transport host=${config.smtp.host} port=${config.smtp.port} secure=${config.smtp.secure} user=${config.smtp.user}`,
+      `[mail] creating SMTP transport host=${config.smtp.host} port=${config.smtp.port} secure=${config.smtp.secure} user=${config.smtp.user}`,
     )
     transporter = nodemailer.createTransport({
       host: config.smtp.host,
@@ -27,7 +29,6 @@ function getTransporter() {
   }
   return transporter
 }
-
 
 const label = (key) =>
   key
@@ -59,17 +60,14 @@ function absoluteLink(fileUrl) {
   return config.publicUrl ? `${config.publicUrl}${fileUrl}` : ''
 }
 
-/**
- * Emails one stored submission to the private inbox, attaching the uploaded
- * document when there is one (and always including a download link).
- */
-export async function sendSubmissionEmail(record) {
-  const transport = getTransporter()
-  if (!transport) {
-    console.warn('[mail] SMTP not configured — skipping email for', record.id)
-    return { sent: false, reason: 'smtp_not_configured' }
-  }
+/** Splits "Name <email@host>" into { name, email }. */
+function parseSender(value) {
+  const match = /^\s*(.*?)\s*<\s*([^>]+)\s*>\s*$/.exec(value || '')
+  if (match) return { name: match[1] || 'Website', email: match[2] }
+  return { name: 'Wondrous Publishing Website', email: (value || '').trim() }
+}
 
+function buildContent(record) {
   const rows = [
     ['Form', record.source || 'contact'],
     ['Request type', record.type || 'general'],
@@ -116,8 +114,76 @@ export async function sendSubmissionEmail(record) {
       </table>
     </div>`
 
+  return { text, html, attachmentPath }
+}
+
+/** Sends via Brevo's HTTP API (port 443 — not blocked by hosts that block SMTP). */
+async function sendViaBrevoApi(record, { text, html, attachmentPath }) {
+  const sender = parseSender(config.mail.from)
+
+  const payload = {
+    sender,
+    to: [{ email: config.mail.to }],
+    subject: `New ${record.type || 'general'} request from ${record.name}`,
+    textContent: text,
+    htmlContent: html,
+  }
+
+  if (record.email) payload.replyTo = { email: record.email, name: record.name || undefined }
+
+  if (attachmentPath) {
+    payload.attachment = [
+      {
+        name: path.basename(attachmentPath),
+        content: fs.readFileSync(attachmentPath).toString('base64'),
+      },
+    ]
+  }
+
   console.log(
-    `[mail] sending id=${record.id} to=${config.mail.to} attachment=${attachmentPath ? 'yes' : 'no'}`,
+    `[mail] Brevo API send id=${record.id} to=${config.mail.to} attachment=${attachmentPath ? 'yes' : 'no'}`,
+  )
+
+  const response = await fetch(BREVO_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'api-key': config.brevoApiKey,
+      'content-type': 'application/json',
+      accept: 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+
+  const body = await response.text()
+  if (!response.ok) {
+    console.error(`[mail] Brevo API failed id=${record.id} status=${response.status}: ${body}`)
+    throw new Error(`Brevo API error ${response.status}: ${body}`)
+  }
+
+  console.log(`[mail] Brevo API sent id=${record.id} response=${body}`)
+  return { sent: true }
+}
+
+/**
+ * Emails one stored submission to the private inbox, attaching the uploaded
+ * document when there is one (and always including a download link).
+ * Uses Brevo's HTTP API when BREVO_API_KEY is set, otherwise falls back to SMTP.
+ */
+export async function sendSubmissionEmail(record) {
+  const content = buildContent(record)
+
+  if (config.brevoApiKey) {
+    return sendViaBrevoApi(record, content)
+  }
+
+  const transport = getTransporter()
+  if (!transport) {
+    console.warn('[mail] no BREVO_API_KEY and SMTP not configured — skipping email for', record.id)
+    return { sent: false, reason: 'email_not_configured' }
+  }
+
+  console.log(
+    `[mail] SMTP send id=${record.id} to=${config.mail.to} attachment=${content.attachmentPath ? 'yes' : 'no'}`,
   )
 
   try {
@@ -126,9 +192,9 @@ export async function sendSubmissionEmail(record) {
       to: config.mail.to,
       replyTo: record.email || undefined,
       subject: `New ${record.type || 'general'} request from ${record.name}`,
-      text,
-      html,
-      attachments: attachmentPath ? [{ path: attachmentPath }] : [],
+      text: content.text,
+      html: content.html,
+      attachments: content.attachmentPath ? [{ path: content.attachmentPath }] : [],
     })
     console.log(`[mail] sent id=${record.id} messageId=${info.messageId} response=${info.response}`)
     return { sent: true }
@@ -136,12 +202,6 @@ export async function sendSubmissionEmail(record) {
     console.error(
       `[mail] failed id=${record.id} code=${error.code || 'n/a'} command=${error.command || 'n/a'}: ${error.message}`,
     )
-    if (error.code === 'ETIMEDOUT' || error.code === 'ECONNECTION') {
-      console.error(
-        '[mail] SMTP connection timed out. Port 587 is often blocked by the host — try SMTP_PORT=2525 (Brevo also accepts 2525) or SMTP_PORT=465 with SMTP_SECURE=true.',
-      )
-    }
     throw error
   }
 }
-
